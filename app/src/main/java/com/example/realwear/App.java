@@ -12,7 +12,7 @@ public class App extends Application {
     private static FileService fileService;
 
     public static String getFileProvider() {
-        return "com.gausslab.fileprovider";
+        return "com.example.realwear.fileprovider";
     }
 
 

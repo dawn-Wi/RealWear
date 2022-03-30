@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RealWear">
+        <service
+            android:name=".FileService"
+            android:enabled="true"
+            android:exported="true" />
         <activity
             android:name=".SplashActivity"
             android:exported="true" >
@@ -21,6 +25,15 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"/>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.realwear.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
     </application>
 
