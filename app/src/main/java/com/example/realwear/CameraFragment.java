@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Environment;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,7 @@ public class CameraFragment extends Fragment {
 //
 //            }
 //        };
+        fileService = App.getFileService();
 
     }
 
@@ -93,6 +95,18 @@ public class CameraFragment extends Fragment {
                             Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
                             imageView.setImageBitmap(bitmap);
                             imageView.invalidate();
+                            fileService.saveFileToDatabase(imageFile, "test.jpg", new FileService.FileServiceCallback<Result>() {
+                                @Override
+                                public void onComplete(Result result) {
+                                    if(result instanceof Result.Success){
+                                        Log.d("asdf", "onComplete: Success");
+                                    }
+                                    else
+                                    {
+                                        Log.d("asdf", ((Result.Error)result).getError().getMessage());
+                                    }
+                                }
+                            });
                         }
                     }
                 });

@@ -73,6 +73,18 @@ public class FileService extends Service
         return file;
     }
 
+    public void saveFileToDatabase(File toSave, String destination, FileServiceCallback<Result> callback)
+    {
+        firebaseDataSource.uploadFile(toSave, destination, new FirebaseDataSource.DataSourceCallback<Result>()
+        {
+            @Override
+            public void onComplete(Result result)
+            {
+                callback.onComplete(result);
+            }
+        });
+    }
+
 
     public void setFirebaseDataSource(FirebaseDataSource fds)
     {
