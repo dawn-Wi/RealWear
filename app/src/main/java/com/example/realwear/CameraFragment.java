@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -38,6 +39,8 @@ public class CameraFragment extends Fragment {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private FrameLayout imageFrameLayout;
     private ImageView imageView;
+    private Button camera_bt_retake;
+    private Button camera_bt_submit;
     FileService fileService;
     private File imageFile;
 
@@ -56,19 +59,6 @@ public class CameraFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ServiceConnection connection = new ServiceConnection() {
-//            @Override
-//            public void onServiceConnected(ComponentName componentName, IBinder service) {
-//                FileService.LocalBinder binder = (FileService.LocalBinder) service;
-//                fileService = binder.getService();
-//                App.setFileService(fileService);
-//            }
-//
-//            @Override
-//            public void onServiceDisconnected(ComponentName componentName) {
-//
-//            }
-//        };
         fileService = App.getFileService();
 
     }
@@ -85,6 +75,8 @@ public class CameraFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         imageFrameLayout = view.findViewById(R.id.camera_fl_imageFrame);
         imageView = view.findViewById(R.id.camera_iv_image);
+        camera_bt_retake = view.findViewById(R.id.camera_bt_retake);
+        camera_bt_submit = view.findViewById(R.id.camera_bt_submit);
 
         ActivityResultLauncher<Intent> launchCamera = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -95,18 +87,18 @@ public class CameraFragment extends Fragment {
                             Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
                             imageView.setImageBitmap(bitmap);
                             imageView.invalidate();
-                            fileService.saveFileToDatabase(imageFile, "test.jpg", new FileService.FileServiceCallback<Result>() {
-                                @Override
-                                public void onComplete(Result result) {
-                                    if(result instanceof Result.Success){
-                                        Log.d("asdf", "onComplete: Success");
-                                    }
-                                    else
-                                    {
-                                        Log.d("asdf", ((Result.Error)result).getError().getMessage());
-                                    }
-                                }
-                            });
+//                            fileService.saveFileToDatabase(imageFile, "test.jpg", new FileService.FileServiceCallback<Result>() {
+//                                @Override
+//                                public void onComplete(Result result) {
+//                                    if(result instanceof Result.Success){
+//                                        Log.d("asdf", "onComplete: Success");
+//                                    }
+//                                    else
+//                                    {
+//                                        Log.d("asdf", ((Result.Error)result).getError().getMessage());
+//                                    }
+//                                }
+//                            });
                         }
                     }
                 });
@@ -121,6 +113,31 @@ public class CameraFragment extends Fragment {
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
         }
         launchCamera.launch(takePictureIntent);
+
+        camera_bt_retake.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchCamera.launch(takePictureIntent);
+            }
+        });
+        camera_bt_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fileService.saveFileToDatabase(imageFile, "test.jpg", new FileService.FileServiceCallback<Result>() {
+                    @Override
+                    public void onComplete(Result result) {
+                        if(result instanceof Result.Success){
+                            Log.d("asdf", "onComplete: Success");
+                        }
+                        else
+                        {
+                            Log.d("asdf", ((Result.Error)result).getError().getMessage());
+                        }
+                    }
+                });
+
+            }
+        });
 
     }
 
