@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1068467986711",
+    "project_id": "realwear-eaf85",
+    "storage_bucket": "realwear-eaf85.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068467986711:android:696e56b8d6ef3ba32b5752",
+        "android_client_info": {
+          "package_name": "com.example.realwear"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068467986711-pc5akmh0tvs41eiejs5ulik419qs5bo0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaND--mUon8xVKM73Upk5ZXrp-8gvTqDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1068467986711-pc5akmh0tvs41eiejs5ulik419qs5bo0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
