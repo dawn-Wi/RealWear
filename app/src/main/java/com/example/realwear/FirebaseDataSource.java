@@ -31,7 +31,7 @@ public class FirebaseDataSource {
     public void uploadFile(File toUpload, String destination, DataSourceCallback<Result> callback)
     {
         Uri localFile = Uri.fromFile(toUpload);
-        StorageReference storageReference = firebaseStorage.getReference().child("test/test.jpg");
+        StorageReference storageReference = firebaseStorage.getReference().child(destination);
         UploadTask uploadTask = storageReference.putFile(localFile);
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
         {

@@ -87,18 +87,6 @@ public class CameraFragment extends Fragment {
                             Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
                             imageView.setImageBitmap(bitmap);
                             imageView.invalidate();
-//                            fileService.saveFileToDatabase(imageFile, "test.jpg", new FileService.FileServiceCallback<Result>() {
-//                                @Override
-//                                public void onComplete(Result result) {
-//                                    if(result instanceof Result.Success){
-//                                        Log.d("asdf", "onComplete: Success");
-//                                    }
-//                                    else
-//                                    {
-//                                        Log.d("asdf", ((Result.Error)result).getError().getMessage());
-//                                    }
-//                                }
-//                            });
                         }
                     }
                 });
@@ -135,7 +123,7 @@ public class CameraFragment extends Fragment {
                         }
                     }
                 });
-
+                launchCamera.launch(takePictureIntent);
             }
         });
 
