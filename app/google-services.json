@@ -1,34 +1,114 @@
 {
   "project_info": {
-    "project_number": "1068467986711",
-    "project_id": "realwear-eaf85",
-    "storage_bucket": "realwear-eaf85.appspot.com"
+    "project_number": "437449938533",
+    "firebase_url": "https://ar-logbook-7015f-default-rtdb.firebaseio.com",
+    "project_id": "ar-logbook-7015f",
+    "storage_bucket": "ar-logbook-7015f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1068467986711:android:696e56b8d6ef3ba32b5752",
+        "mobilesdk_app_id": "1:437449938533:android:420ac48098f1793798588c",
         "android_client_info": {
-          "package_name": "com.example.realwear"
+          "package_name": "com.gausslab.arlogbook"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1068467986711-pc5akmh0tvs41eiejs5ulik419qs5bo0.apps.googleusercontent.com",
+          "client_id": "437449938533-e9d1isq9ev4jh5ma3rvhbbun94itemcv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDaND--mUon8xVKM73Upk5ZXrp-8gvTqDc"
+          "current_key": "AIzaSyDuzbwDZjjb6ySDkP8kxtqB4k_XjyLTQQc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1068467986711-pc5akmh0tvs41eiejs5ulik419qs5bo0.apps.googleusercontent.com",
+              "client_id": "437449938533-e9d1isq9ev4jh5ma3rvhbbun94itemcv.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "437449938533-5kk175vv8l13c97b2i1jmcdef62dep1u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gausslab.xrlogbook"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437449938533:android:0306f7e01117852698588c",
+        "android_client_info": {
+          "package_name": "com.gausslab.realwear"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437449938533-e9d1isq9ev4jh5ma3rvhbbun94itemcv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuzbwDZjjb6ySDkP8kxtqB4k_XjyLTQQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437449938533-e9d1isq9ev4jh5ma3rvhbbun94itemcv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "437449938533-5kk175vv8l13c97b2i1jmcdef62dep1u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gausslab.xrlogbook"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437449938533:android:c9195b022f60405198588c",
+        "android_client_info": {
+          "package_name": "com.gausslab.xrlogbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437449938533-e9d1isq9ev4jh5ma3rvhbbun94itemcv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuzbwDZjjb6ySDkP8kxtqB4k_XjyLTQQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437449938533-e9d1isq9ev4jh5ma3rvhbbun94itemcv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "437449938533-5kk175vv8l13c97b2i1jmcdef62dep1u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gausslab.xrlogbook"
+              }
             }
           ]
         }

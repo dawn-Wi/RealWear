@@ -1,19 +1,14 @@
-package com.example.realwear;
-
-import static com.example.realwear.R.id.cameraFragment;
+package com.gausslab.realwear;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
 
 public class SplashActivity extends AppCompatActivity {

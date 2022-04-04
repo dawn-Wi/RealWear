@@ -1,4 +1,4 @@
-package com.example.realwear;
+package com.gausslab.realwear;
 
 import org.junit.Test;
 

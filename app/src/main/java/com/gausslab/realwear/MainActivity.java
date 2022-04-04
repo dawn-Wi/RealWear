@@ -1,13 +1,9 @@
-package com.example.realwear;
+package com.gausslab.realwear;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -16,6 +12,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         FileService fileService = App.getFileService();
         FirebaseDataSource firebaseDataSource=new FirebaseDataSource();
+        MainViewModel mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel.setFirebaseDataSource(firebaseDataSource);
         fileService.setFirebaseDataSource(firebaseDataSource);
     }
 }

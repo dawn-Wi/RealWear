@@ -1,10 +1,7 @@
-package com.example.realwear;
+package com.gausslab.realwear;
 
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -18,24 +15,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
-import android.os.Environment;
-import android.os.IBinder;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CameraFragment extends Fragment {
+    private MainViewModel mainViewModel;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private FrameLayout imageFrameLayout;
     private ImageView imageView;
@@ -60,6 +55,7 @@ public class CameraFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fileService = App.getFileService();
+        mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
     }
 
@@ -78,6 +74,15 @@ public class CameraFragment extends Fragment {
         camera_bt_retake = view.findViewById(R.id.camera_bt_retake);
         camera_bt_submit = view.findViewById(R.id.camera_bt_submit);
 
+        mainViewModel.isSubmitSuccessful().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean submitSuccessful)
+            {
+                if(submitSuccessful)
+                    Toast.makeText(getContext(), "보고서 제출 완료", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         ActivityResultLauncher<Intent> launchCamera = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -93,7 +98,7 @@ public class CameraFragment extends Fragment {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         FileService fileService = App.getFileService();
-        imageFile = fileService.createFile("",  "test.jpg");
+        imageFile = fileService.createFile("",  "temp.jpg");
 
         if(imageFile != null)
         {
@@ -108,22 +113,11 @@ public class CameraFragment extends Fragment {
                 launchCamera.launch(takePictureIntent);
             }
         });
+
         camera_bt_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fileService.saveFileToDatabase(imageFile, "test.jpg", new FileService.FileServiceCallback<Result>() {
-                    @Override
-                    public void onComplete(Result result) {
-                        if(result instanceof Result.Success){
-                            Log.d("asdf", "onComplete: Success");
-                        }
-                        else
-                        {
-                            Log.d("asdf", ((Result.Error)result).getError().getMessage());
-                        }
-                    }
-                });
-                launchCamera.launch(takePictureIntent);
+                mainViewModel.submitImage(imageFile);
             }
         });
 
