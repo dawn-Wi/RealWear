@@ -7,4 +7,29 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gauss_blue">#004070</color>
+    <color name="gauss_light_blue">#6088B5</color>
+    <color name="gauss_dark_blue">#1F1B37</color>
+    <color name="open_task_green">#4EFF60</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="background_blue">#0F1553</color>
+
+    <color name="gauss_blue1">#036EB7</color>
+    <color name="gauss_blue2">#2CA6E0</color>
+    <color name="gauss_blue3">#7DCCF3</color>
+    <color name="gauss_blue4">#0F1553</color>
+    <color name="gauss_grey">#9F9F9F</color>
+
+    <color name="cardBackground_green">#35AF3A</color>
+    <color name="cardBackground_yellow">#FAE84B</color>
+    <color name="cardBackground_red">#FD584C</color>
+    <color name="cardBackground_white">#FFFFFF</color>
+    <color name="cardBackground_green_faded">#B335AF3A</color>
+    <color name="cardBackground_yellow_faded">#B3FAE84B</color>
+    <color name="cardBackground_red_faded">#B3FD584C</color>
+    <color name="cardBackground_white_faded">#B3FFFFFF</color>
 </resources>
