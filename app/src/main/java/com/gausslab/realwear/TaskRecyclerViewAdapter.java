@@ -22,24 +22,32 @@ import com.gausslab.realwear.databinding.ObjectMytasksBinding;
 
 import java.util.List;
 
-public class MyTasksRecyclerViewAdapter extends RecyclerView.Adapter<MyTasksRecyclerViewAdapter.ViewHolder> {
-    private List<MyTask> taskList;
-    protected OnItemInteractionListener<MyTask> listener;
-    private MyTasksViewModel myTasksViewModel;
+public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerViewAdapter.ViewHolder>
+{
 
-    public MyTasksRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm,OnItemInteractionListener<MyTask> clickListener){
+    protected List<MyTask> taskList;
+    protected OnItemInteractionListener<MyTask> listener;
+
+    public TaskRecyclerViewAdapter(List<MyTask> items)
+    {
         taskList = items;
-        myTasksViewModel = mvm;
+    }
+
+    public TaskRecyclerViewAdapter(List<MyTask> items, OnItemInteractionListener<MyTask> clickListener)
+    {
+        taskList = items;
         listener = clickListener;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         return new ViewHolder(ObjectMytasksBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position)
+    {
         MyTask currTask = taskList.get(position);
         holder.tv_title.setText(currTask.getTitle());
         holder.tv_location.setText("Location"); //TODO: Implement
@@ -148,33 +156,3 @@ public class MyTasksRecyclerViewAdapter extends RecyclerView.Adapter<MyTasksRecy
         }
     }
 }
-
-//public class MyTasksRecyclerViewAdapter extends TaskRecyclerViewAdapter {
-//
-//    public MyTasksRecyclerViewAdapter(List<MyTask> items) { super(items);}
-//
-//    public MyTasksRecyclerViewAdapter(List<MyTask> items, OnItemInteractionListener<MyTask> clickListener) {
-//        super(items, clickListener);
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(ViewHolder holder, int position){
-//        super.onBindViewHolder(holder,position);
-//        MyTask myTask = taskList.get(position);
-//        if(myTask.getProgressStatus() == ProgressStatus.PENDING_REVIEW){
-//            holder.tv_status.getBackground().setTint(App.getCardColor(App.ColorName.GREEN));
-//        }
-//        else if(myTask.getProgressStatus() == ProgressStatus.STARTED)
-//        {
-//            holder.tv_status.getBackground().setTint(App.getCardColor(App.ColorName.YELLOW));
-//        }
-//        else if(myTask.getProgressStatus() == ProgressStatus.REJECTED)
-//        {
-//            holder.tv_status.getBackground().setTint(App.getCardColor(App.ColorName.RED));
-//        }
-//        else if(myTask.getProgressStatus() == ProgressStatus.NOT_STARTED)
-//        {
-//            //holder.tv_status.getBackground().setTint(App.getCardColor(App.ColorName.GREEN));
-//        }
-//    }
-//}

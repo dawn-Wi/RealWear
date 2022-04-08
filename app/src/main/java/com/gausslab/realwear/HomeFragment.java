@@ -43,6 +43,7 @@ public class HomeFragment extends Fragment {
     {
         super.onViewCreated(view, savedInstanceState);
         home_bt_camera = view.findViewById(R.id.home_bt_camera);
+        home_bt_mytask = view.findViewById(R.id.home_bt_mytask);
 
         home_bt_camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,11 +52,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-//        home_bt_mytask.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        home_bt_mytask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_myTasksFragment);
+            }
+        });
     }
 }

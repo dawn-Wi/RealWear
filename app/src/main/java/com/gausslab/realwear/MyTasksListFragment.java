@@ -14,40 +14,19 @@ import android.view.ViewGroup;
 
 import com.gausslab.realwear.placeholder.PlaceholderContent;
 
-/**
- * A fragment representing a list of Items.
- */
 public class MyTasksListFragment extends Fragment {
+    protected RecyclerView.Adapter adapter;
+    RecyclerView recyclerView;
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
-
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public MyTasksListFragment() {
+    public MyTasksListFragment(RecyclerView.Adapter adapter) {
+        this.adapter = adapter;
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static MyTasksListFragment newInstance(int columnCount) {
-        MyTasksListFragment fragment = new MyTasksListFragment();
+    public static MyTasksListFragment newInstance(RecyclerView.Adapter adapter) {
+        MyTasksListFragment fragment = new MyTasksListFragment(adapter);
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
     }
 
     @Override
@@ -56,16 +35,22 @@ public class MyTasksListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mytasks_list, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        if(view instanceof RecyclerView)
+        {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyTasksRecyclerViewAdapter(PlaceholderContent.ITEMS));
+            recyclerView = (RecyclerView) view;
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            recyclerView.setAdapter(adapter);
         }
+
         return view;
+    }
+
+    @Override
+    public void onDestroyView()
+    {
+        recyclerView.setAdapter(null);
+        recyclerView = null;
+        super.onDestroyView();
     }
 }
