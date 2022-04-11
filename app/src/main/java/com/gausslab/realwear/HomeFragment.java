@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class HomeFragment extends Fragment {
+    MyTasksViewModel myTasksViewModel;
     private Button home_bt_camera;
     private Button home_bt_mytask;
 
@@ -30,6 +33,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myTasksViewModel = new ViewModelProvider(requireActivity()).get(MyTasksViewModel.class);
+        FirebaseDataSource ds = new FirebaseDataSource();
+        TaskRepository.getInstance().setDateSource(ds);
     }
 
     @Override
@@ -55,7 +61,18 @@ public class HomeFragment extends Fragment {
         home_bt_mytask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_myTasksFragment);
+                myTasksViewModel.loadMyTaskList("RealWear");
+//                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_myTasksFragment);
+            }
+        });
+
+        myTasksViewModel.isListLoaded().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean loaded) {
+                if(loaded){
+                    NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_myTasksFragment);
+                    myTasksViewModel.setListLoaded(false);
+                }
             }
         });
     }

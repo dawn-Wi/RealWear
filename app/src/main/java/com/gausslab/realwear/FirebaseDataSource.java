@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Transaction;
@@ -19,6 +20,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirebaseDataSource {
     private final FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
@@ -135,6 +138,27 @@ public class FirebaseDataSource {
                 }
             });
         }
+    }
+
+    public void loadMyTaskList(String id,DataSourceCallback<Result> callback){
+        List<MyTask> toReturn = new ArrayList<>();
+        firebaseFirestore.collection("tasks")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        List<DocumentSnapshot> snaps = task.getResult().getDocuments();
+                        for(int i=0;i<snaps.size();i++){
+                            if(snaps.get(i).getString("assignedUserDisplayName").equals(id)){
+                                MyTask toAdd = new MyTask((snaps.get(i).getString("title")), snaps.get(i).getString("creatorId"), snaps.get(i).getString("progressStatus"));
+                                toReturn.add(toAdd);
+                            }
+                        }
+                        callback.onComplete(new Result.Success<List<MyTask>>(toReturn));
+                    }else{
+                        callback.onComplete(new Result.Error(task.getException()));
+                    }
+                });
+
     }
 
     public enum KeyType

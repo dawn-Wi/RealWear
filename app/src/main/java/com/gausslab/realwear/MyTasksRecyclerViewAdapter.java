@@ -23,130 +23,179 @@ import com.gausslab.realwear.databinding.ObjectMytasksBinding;
 import java.util.List;
 
 public class MyTasksRecyclerViewAdapter extends RecyclerView.Adapter<MyTasksRecyclerViewAdapter.ViewHolder> {
-    private List<MyTask> taskList;
-    protected OnItemInteractionListener<MyTask> listener;
+
+    private List<MyTask> myTaskList;
     private MyTasksViewModel myTasksViewModel;
 
-    public MyTasksRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm,OnItemInteractionListener<MyTask> clickListener){
-        taskList = items;
+    public MyTasksRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm){
+        myTaskList = items;
         myTasksViewModel = mvm;
-        listener = clickListener;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(ObjectMytasksBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        return new ViewHolder(ObjectMytasksBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        MyTask currTask = taskList.get(position);
-        holder.tv_title.setText(currTask.getTitle());
+    public void onBindViewHolder(final ViewHolder holder, int position){
+        holder.tv_title.setText(myTaskList.get(position).getTitle());
         holder.tv_location.setText("Location"); //TODO: Implement
-        holder.tv_manager.setText(currTask.getCreatorId()); //TODO: Change to Display Name
-        //holder.tv_date.setText(currTask.getTimes().get(AssignmentStatus.ASSIGNED.name()).toDate().toString());
-        holder.tv_status.setText(currTask.getProgressStatus().name());
-
-        holder.bt_options.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    holder.bt_options.showContextMenu(v.getX(), v.getY());
-                }
-            }
-        });
-
-        if(listener != null)
-        {
-            if(listener instanceof OnClickInteractionListener)
-            {
-                holder.card.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        ((OnClickInteractionListener<MyTask>) listener).onItemClick(taskList.get(holder.getAbsoluteAdapterPosition()));
-                    }
-                });
-            }
-            if(listener instanceof OnContextMenuInteractionListener)
-            {
-                holder.card.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener()
-                {
-                    @Override
-                    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
-                    {
-                        menu.setHeaderTitle("Select Action");
-                        MenuItem edit = menu.add(Menu.NONE, 1, 1, "Edit");
-                        MenuItem remove = menu.add(Menu.NONE, 3, 3, "Remove");
-                        edit.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener()
-                        {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem menuItem)
-                            {
-                                ((OnContextMenuInteractionListener<MyTask>) listener).onContextEdit(taskList.get(holder.getAbsoluteAdapterPosition()));
-                                return true;
-                            }
-                        });
-                        remove.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener()
-                        {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem item)
-                            {
-                                ((OnContextMenuInteractionListener<MyTask>) listener).onContextRemove(taskList.get(holder.getAbsoluteAdapterPosition()));
-                                return true;
-                            }
-                        });
-                    }
-                });
-            }
-        }
-    }
-
-    public void setTaskList(List<MyTask> newList)
-    {
-        TaskListDiffUtil diffUtil = new TaskListDiffUtil(taskList, newList);
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtil);
-        diffResult.dispatchUpdatesTo(this);
-        taskList = newList;
+        holder.tv_manager.setText(myTaskList.get(position).getCreatorId()); //TODO: Change to Display Name
+        holder.tv_date.setText("2020/01/01");
+//        holder.tv_date.setText(myTaskList.get(position).getTimes().get(AssignmentStatus.ASSIGNED.name()).toDate().toString());
+        holder.tv_status.setText(myTaskList.get(position).getProgressStatus().name());
     }
 
     @Override
-    public int getItemCount()
-    {
-        return taskList.size();
-    }
+    public int getItemCount(){return myTaskList.size();}
 
-    public class ViewHolder extends RecyclerView.ViewHolder
-    {
+    public class ViewHolder extends RecyclerView.ViewHolder{
         public final TextView tv_title;
         public final TextView tv_location;
         public final TextView tv_manager;
         public final TextView tv_date;
         public final TextView tv_status;
-        public final ImageButton bt_options;
-        public final CardView card;
 
-        public ViewHolder(@NonNull ObjectMytasksBinding binding)
-        {
+        public ViewHolder(ObjectMytasksBinding binding){
             super(binding.getRoot());
             tv_title = binding.objTaskListTvTitle;
             tv_location = binding.objTaskListTvLocation;
             tv_manager = binding.objTaskListTvManager;
             tv_date = binding.objTaskListTvDate;
             tv_status = binding.objTaskListTvStatus;
-            bt_options = binding.objTaskListBtOptions;
-            card = binding.objTasklistCard;
         }
 
-        @Override
-        public String toString()
-        {
-            return super.toString() + " '" + tv_title.getText() + "'";
-        }
     }
+    public void setMyTaskList(List<MyTask> newlist){
+        myTaskList = newlist;
+        notifyDataSetChanged();
+    }
+
+//    private List<MyTask> taskList;
+//    protected OnItemInteractionListener<MyTask> listener;
+//    private MyTasksViewModel myTasksViewModel;
+//
+//    public MyTasksRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm,OnItemInteractionListener<MyTask> clickListener){
+//        taskList = items;
+//        myTasksViewModel = mvm;
+//        listener = clickListener;
+//    }
+//
+//    @Override
+//    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//        return new ViewHolder(ObjectMytasksBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+//    }
+//
+//    @Override
+//    public void onBindViewHolder(final ViewHolder holder, int position) {
+//        MyTask currTask = taskList.get(position);
+//        holder.tv_title.setText(currTask.getTitle());
+//        holder.tv_location.setText("Location"); //TODO: Implement
+//        holder.tv_manager.setText(currTask.getCreatorId()); //TODO: Change to Display Name
+//        //holder.tv_date.setText(currTask.getTimes().get(AssignmentStatus.ASSIGNED.name()).toDate().toString());
+//        holder.tv_status.setText(currTask.getProgressStatus().name());
+//
+//        holder.bt_options.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                    holder.bt_options.showContextMenu(v.getX(), v.getY());
+//                }
+//            }
+//        });
+//
+//        if(listener != null)
+//        {
+//            if(listener instanceof OnClickInteractionListener)
+//            {
+//                holder.card.setOnClickListener(new View.OnClickListener()
+//                {
+//                    @Override
+//                    public void onClick(View view)
+//                    {
+//                        ((OnClickInteractionListener<MyTask>) listener).onItemClick(taskList.get(holder.getAbsoluteAdapterPosition()));
+//                    }
+//                });
+//            }
+//            if(listener instanceof OnContextMenuInteractionListener)
+//            {
+//                holder.card.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener()
+//                {
+//                    @Override
+//                    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+//                    {
+//                        menu.setHeaderTitle("Select Action");
+//                        MenuItem edit = menu.add(Menu.NONE, 1, 1, "Edit");
+//                        MenuItem remove = menu.add(Menu.NONE, 3, 3, "Remove");
+//                        edit.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener()
+//                        {
+//                            @Override
+//                            public boolean onMenuItemClick(MenuItem menuItem)
+//                            {
+//                                ((OnContextMenuInteractionListener<MyTask>) listener).onContextEdit(taskList.get(holder.getAbsoluteAdapterPosition()));
+//                                return true;
+//                            }
+//                        });
+//                        remove.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener()
+//                        {
+//                            @Override
+//                            public boolean onMenuItemClick(MenuItem item)
+//                            {
+//                                ((OnContextMenuInteractionListener<MyTask>) listener).onContextRemove(taskList.get(holder.getAbsoluteAdapterPosition()));
+//                                return true;
+//                            }
+//                        });
+//                    }
+//                });
+//            }
+//        }
+//    }
+//
+//    public void setTaskList(List<MyTask> newList)
+//    {
+//        TaskListDiffUtil diffUtil = new TaskListDiffUtil(taskList, newList);
+//        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtil);
+//        diffResult.dispatchUpdatesTo(this);
+//        taskList = newList;
+//    }
+//
+//    @Override
+//    public int getItemCount()
+//    {
+//        return taskList.size();
+//    }
+//
+//    public class ViewHolder extends RecyclerView.ViewHolder
+//    {
+//        public final TextView tv_title;
+//        public final TextView tv_location;
+//        public final TextView tv_manager;
+//        public final TextView tv_date;
+//        public final TextView tv_status;
+//        public final ImageButton bt_options;
+//        public final CardView card;
+//
+//        public ViewHolder(@NonNull ObjectMytasksBinding binding)
+//        {
+//            super(binding.getRoot());
+//            tv_title = binding.objTaskListTvTitle;
+//            tv_location = binding.objTaskListTvLocation;
+//            tv_manager = binding.objTaskListTvManager;
+//            tv_date = binding.objTaskListTvDate;
+//            tv_status = binding.objTaskListTvStatus;
+//            bt_options = binding.objTaskListBtOptions;
+//            card = binding.objTasklistCard;
+//        }
+//
+//        @Override
+//        public String toString()
+//        {
+//            return super.toString() + " '" + tv_title.getText() + "'";
+//        }
+//    }
 }
 
 //public class MyTasksRecyclerViewAdapter extends TaskRecyclerViewAdapter {

@@ -14,9 +14,11 @@ public class MyTask {
     private ProgressStatus progressStatus;
     private Map<String, Timestamp> times;
 
-    public MyTask() {
+    public MyTask(String title , String creatorId, String progressStatus) {
+        this.title = title;
+        this.creatorId = creatorId;
         times = new HashMap<String, Timestamp>();
-        progressStatus = ProgressStatus.NOT_STARTED;
+        this.progressStatus = ProgressStatus.NOT_STARTED;
     }
     public void addTime(String key, Timestamp time)
     {
