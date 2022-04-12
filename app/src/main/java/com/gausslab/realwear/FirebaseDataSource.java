@@ -10,11 +10,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -140,25 +143,50 @@ public class FirebaseDataSource {
         }
     }
 
-    public void loadMyTaskList(String id,DataSourceCallback<Result> callback){
-        List<MyTask> toReturn = new ArrayList<>();
-        firebaseFirestore.collection("tasks")
+    public void getDocumentsFromCollection_whereEqualTo_once(String collectionName, String equalParameter1, String equalParameter2, DataSourceCallback<Result> callback)
+    {
+        Log.d("DEBUG:DataSource", "getDocumentsFromCollection_whereEqualTo_once: startTime = " + Timestamp.now().getSeconds());
+        firebaseFirestore.collection(collectionName)
+                .whereEqualTo(equalParameter1, equalParameter2)
                 .get()
-                .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        List<DocumentSnapshot> snaps = task.getResult().getDocuments();
-                        for(int i=0;i<snaps.size();i++){
-                            if(snaps.get(i).getString("assignedUserDisplayName").equals(id)){
-                                MyTask toAdd = new MyTask((snaps.get(i).getString("title")), snaps.get(i).getString("creatorId"), snaps.get(i).getString("progressStatus"));
-                                toReturn.add(toAdd);
-                            }
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task)
+                    {
+                        if(task.isSuccessful())
+                        {
+                            List<DocumentSnapshot> documentsList = task.getResult().getDocuments();
+                            Log.d("DEBUG:DataSource", "getDocumentsFromCollection_whereEqualTo_once: finishTime = " + Timestamp.now().getSeconds());
+                            callback.onComplete(new Result.Success<List<DocumentSnapshot>>(documentsList));
                         }
-                        callback.onComplete(new Result.Success<List<MyTask>>(toReturn));
-                    }else{
-                        callback.onComplete(new Result.Error(task.getException()));
+                        else
+                        {
+                            callback.onComplete(new Result.Error(task.getException()));
+                        }
                     }
                 });
+    }
 
+    public void downloadFile(String downloadPath, File localFile, DataSourceCallback<Result> callback)
+    {
+        Log.d("DEBUG:DataSource", "downloadFile: " + downloadPath);
+        StorageReference ref = firebaseStorage.getReference().child(downloadPath);
+        ref.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>()
+        {
+            @Override
+            public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task)
+            {
+                if(task.isSuccessful())
+                {
+                    callback.onComplete(new Result.Success<File>(localFile));
+                }
+                else
+                {
+                    callback.onComplete(new Result.Error(task.getException()));
+                }
+            }
+        });
     }
 
     public enum KeyType

@@ -39,12 +39,13 @@ public class MyTasksRecyclerViewAdapter extends RecyclerView.Adapter<MyTasksRecy
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position){
-        holder.tv_title.setText(myTaskList.get(position).getTitle());
+        MyTask currMyTask = myTaskList.get(position);
+        holder.tv_title.setText(currMyTask.getTitle());
         holder.tv_location.setText("Location"); //TODO: Implement
-        holder.tv_manager.setText(myTaskList.get(position).getCreatorId()); //TODO: Change to Display Name
+        holder.tv_manager.setText(currMyTask.getCreatorId()); //TODO: Change to Display Name
         holder.tv_date.setText("2020/01/01");
 //        holder.tv_date.setText(myTaskList.get(position).getTimes().get(AssignmentStatus.ASSIGNED.name()).toDate().toString());
-        holder.tv_status.setText(myTaskList.get(position).getProgressStatus().name());
+        holder.tv_status.setText(currMyTask.getProgressStatus().name());
     }
 
     @Override
@@ -67,8 +68,8 @@ public class MyTasksRecyclerViewAdapter extends RecyclerView.Adapter<MyTasksRecy
         }
 
     }
-    public void setMyTaskList(List<MyTask> newlist){
-        myTaskList = newlist;
+    public void setMyTaskList(List<MyTask> newList){
+        myTaskList = newList;
         notifyDataSetChanged();
     }
 
