@@ -12,6 +12,7 @@ import android.os.Binder;
 import android.os.Environment;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -130,6 +131,58 @@ public class FileService extends Service
             e.printStackTrace();
             callback.onComplete(new Result.Error(e));
         }
+    }
+
+    public void getImageDrawable(String filePath, FileServiceCallback<Result<Drawable>> callback)
+    {
+        File file = new File(imageStorageDir, filePath);
+        if(file.exists())
+        {
+            Drawable d = Drawable.createFromPath(file.getAbsolutePath());
+            callback.onComplete(new Result.Success<Drawable>(d));
+        }
+        else
+        {
+            try
+            {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+                firebaseDataSource.downloadFile(filePath, file, new FirebaseDataSource.DataSourceCallback<Result>()
+                {
+                    @Override
+                    public void onComplete(Result result)
+                    {
+                        if(result instanceof Result.Success)
+                        {
+                            Log.d("DEBUG", "FileService : getImageDrawable() : " + filePath + " was downloaded");
+                            File toReturn = ((Result.Success<File>) result).getData();
+                            callback.onComplete(new Result.Success<Drawable>(Drawable.createFromPath(toReturn.getAbsolutePath())));
+                        }
+                        else
+                        {
+                            Log.d("DEBUG", "FileService : getImageDrawable() : " + filePath + " failed to download");
+                            Log.d("DEBUG", ((Result.Error) result).getError().getMessage());
+                            file.delete();
+                            callback.onComplete(result);
+                        }
+                    }
+                });
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Drawable getTempImageDrawable()
+    {
+        return getDrawable(R.drawable.logo_test);
+    }
+
+    public void getTaskStepImageDrawable(String taskId, String stepId, FileServiceCallback<Result<Drawable>> callback)
+    {
+        getImageDrawable(App.getTaskStepImagePath(taskId, stepId), callback);
     }
 
     public void setFirebaseDataSource(FirebaseDataSource fds)

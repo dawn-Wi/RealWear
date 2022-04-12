@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_grd">
+
+    <ImageView
+        android:id="@+id/splash_iv_nameImageView"
+        android:layout_width="212dp"
+        android:layout_height="39dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/splash_iv_logoImageView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/splash_iv_logoImageView"
+        app:layout_constraintTop_toBottomOf="@+id/splash_iv_logoImageView"
+        app:srcCompat="@drawable/logo_splash2" />
+
+    <ImageView
+        android:id="@+id/splash_iv_logoImageView"
+        android:layout_width="213dp"
+        android:layout_height="215dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_splash" />
+</androidx.constraintlayout.widget.ConstraintLayout>

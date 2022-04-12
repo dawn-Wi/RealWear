@@ -21,6 +21,11 @@ public class App extends Application {
         fileService = fs;
     }
 
+    public static String getTaskStepImagePath(String taskId, String stepNumber)
+    {
+        return "taskImages/task_" + taskId + "/stepImages/step_" + stepNumber + ".jpg";
+    }
+
     public static String getReportImagePath(String reportId)
     {
         return "reportImages/report_" + reportId + ".jpg";

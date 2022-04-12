@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
         home_bt_mytask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myTasksViewModel.loadMyTaskList("RealWear");
+                myTasksViewModel.loadMyTaskList("21");
 //                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_myTasksFragment);
             }
         });
@@ -71,7 +71,6 @@ public class HomeFragment extends Fragment {
             public void onChanged(Boolean loaded) {
                 if(loaded){
                     NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_myTasksFragment);
-                    myTasksViewModel.setListLoaded(false);
                 }
             }
         });

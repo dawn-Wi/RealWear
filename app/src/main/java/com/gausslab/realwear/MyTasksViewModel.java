@@ -16,10 +16,10 @@ public class MyTasksViewModel extends ViewModel {
         taskRepository.loadMyTaskList(id, result->{
             if(result instanceof Result.Success){
                 myTaskList = ((Result.Success<List<MyTask>>)result).getData();
-                listLoaded.setValue(true);
+                listLoaded.postValue(true);
             }
             else{
-                listLoaded.setValue(false);
+                listLoaded.postValue(false);
             }
         });
     }
