@@ -1,35 +1,26 @@
-package com.gausslab.realwear;
+package com.gausslab.realwear.mytask;
 
-import android.os.Build;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gausslab.realwear.adapter_listener_interface.OnClickInteractionListener;
-import com.gausslab.realwear.adapter_listener_interface.OnContextMenuInteractionListener;
-import com.gausslab.realwear.adapter_listener_interface.OnItemInteractionListener;
+import com.gausslab.realwear.viewmodel.MyTasksViewModel;
 import com.gausslab.realwear.databinding.ObjectMytasksBinding;
+import com.gausslab.realwear.model.MyTask;
 
 import java.util.List;
 
 public class MyTasksRecyclerViewAdapter extends RecyclerView.Adapter<MyTasksRecyclerViewAdapter.ViewHolder> {
 
     private List<MyTask> myTaskList;
-    private MyTasksViewModel myTasksViewModel;
+    private OnClickInteractionListener<MyTask> listener;
 
-    public MyTasksRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm){
+    public MyTasksRecyclerViewAdapter(List<MyTask> items, OnClickInteractionListener<MyTask> listener){
         myTaskList = items;
-        myTasksViewModel = mvm;
+        this.listener = listener;
     }
 
     @Override
@@ -41,6 +32,7 @@ public class MyTasksRecyclerViewAdapter extends RecyclerView.Adapter<MyTasksRecy
     public void onBindViewHolder(final ViewHolder holder, int position){
         MyTask currMyTask = myTaskList.get(position);
         holder.tv_title.setText(currMyTask.getTitle());
+        holder.tv_description.setText(currMyTask.getDescription());
         holder.tv_location.setText("Location"); //TODO: Implement
         holder.tv_manager.setText(currMyTask.getCreatorId()); //TODO: Change to Display Name
         holder.tv_date.setText("2020/01/01");
@@ -54,6 +46,7 @@ public class MyTasksRecyclerViewAdapter extends RecyclerView.Adapter<MyTasksRecy
     public class ViewHolder extends RecyclerView.ViewHolder{
         public final TextView tv_title;
         public final TextView tv_location;
+        public final TextView tv_description;
         public final TextView tv_manager;
         public final TextView tv_date;
         public final TextView tv_status;
@@ -62,6 +55,7 @@ public class MyTasksRecyclerViewAdapter extends RecyclerView.Adapter<MyTasksRecy
             super(binding.getRoot());
             tv_title = binding.objTaskListTvTitle;
             tv_location = binding.objTaskListTvLocation;
+            tv_description = binding.objTaskListTvDescription;
             tv_manager = binding.objTaskListTvManager;
             tv_date = binding.objTaskListTvDate;
             tv_status = binding.objTaskListTvStatus;

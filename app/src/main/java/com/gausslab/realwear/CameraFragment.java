@@ -27,6 +27,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.gausslab.realwear.viewmodel.MainViewModel;
+
 import java.io.File;
 
 public class CameraFragment extends Fragment {

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyTasksFragment">
+    tools:context=".mytask.MyTasksFragment">
 
     <TextView
         android:id="@+id/textView50"
@@ -12,42 +12,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="상태"
-        app:layout_constraintEnd_toStartOf="@+id/taskList_gl_options"
         app:layout_constraintStart_toStartOf="@+id/taskList_gl_status"
-        app:layout_constraintTop_toBottomOf="@+id/myTaskDetails_lineRight" />
-
-    <TextView
-        android:id="@+id/textView49"
-        style="@style/taskList_header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="날짜"
-        app:layout_constraintEnd_toStartOf="@+id/taskList_gl_status"
-        app:layout_constraintStart_toStartOf="@+id/taskList_gl_date"
-        app:layout_constraintTop_toBottomOf="@+id/myTaskDetails_lineRight" />
-
-    <TextView
-        android:id="@+id/textView48"
-        style="@style/taskList_header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="관리자"
-        app:layout_constraintEnd_toStartOf="@+id/taskList_gl_date"
-        app:layout_constraintStart_toStartOf="@+id/taskList_gl_manager"
         app:layout_constraintTop_toBottomOf="@+id/myTaskDetails_lineRight" />
 
     <TextView
         android:id="@+id/textView47"
         style="@style/taskList_header"
-        android:text="장소"
-        app:layout_constraintEnd_toStartOf="@+id/taskList_gl_manager"
+        android:text="Description"
         app:layout_constraintStart_toStartOf="@+id/taskList_gl_location"
         app:layout_constraintTop_toBottomOf="@+id/myTaskDetails_lineRight" />
 
     <TextView
         android:id="@+id/textView41"
         style="@style/taskList_header"
-        android:text="작업"
+        android:text="작업/장소"
         app:layout_constraintEnd_toStartOf="@+id/taskList_gl_location"
         app:layout_constraintStart_toStartOf="@+id/taskList_gl_title"
         app:layout_constraintTop_toBottomOf="@+id/myTaskDetails_lineRight" />
@@ -108,42 +86,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.02" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/taskList_gl_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/taskList_gl_manager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.45" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/taskList_gl_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.23" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/taskList_gl_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.74" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/taskList_gl_options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

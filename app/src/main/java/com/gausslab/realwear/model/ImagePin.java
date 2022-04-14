@@ -1,4 +1,4 @@
-package com.gausslab.realwear;
+package com.gausslab.realwear.model;
 
 import static com.gausslab.realwear.App.equalHelper;
 

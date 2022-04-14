@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/myStepDetails_tv_navHeader1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Tasks"
+        android:textColor="@color/background_blue"
+        android:textSize="25sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/myStepDetails_tv_navHeader2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:text="Task Details"
+        android:textColor="@color/background_blue"
+        android:textSize="25sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/myStepDetails_tv_navHeader1"
+        app:layout_constraintStart_toEndOf="@+id/myStepDetails_tv_navHeader1"
+        app:layout_constraintTop_toTopOf="@+id/myStepDetails_tv_navHeader1"
+        app:layout_constraintVertical_bias="0.503" />
+
+    <TextView
+        android:id="@+id/myStepDetails_tv_navHeader3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:text="Step Details"
+        android:textColor="@color/background_blue"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/myStepDetails_tv_navHeader1"
+        app:layout_constraintStart_toEndOf="@+id/myStepDetails_tv_navHeader2"
+        app:layout_constraintTop_toTopOf="@+id/myStepDetails_tv_navHeader1"
+        app:layout_constraintVertical_bias="0.503" />
+
+    <View
+        android:id="@+id/myStepDetails_lineLeft"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/background_blue"
+        app:layout_constraintBottom_toBottomOf="@+id/myStepDetails_lineSelected"
+        app:layout_constraintEnd_toStartOf="@+id/myStepDetails_lineSelected"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/myStepDetails_lineSelected" />
+
+    <View
+        android:id="@+id/myStepDetails_lineSelected"
+        android:layout_width="0dp"
+        android:layout_height="7dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/background_blue"
+        app:layout_constraintEnd_toEndOf="@+id/myStepDetails_tv_navHeader3"
+        app:layout_constraintStart_toStartOf="@+id/myStepDetails_tv_navHeader3"
+        app:layout_constraintTop_toBottomOf="@+id/myStepDetails_tv_navHeader2" />
+
+    <View
+        android:id="@+id/myStepDetails_lineRight"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/background_blue"
+        app:layout_constraintBottom_toBottomOf="@+id/myStepDetails_lineSelected"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/myStepDetails_lineSelected"
+        app:layout_constraintTop_toTopOf="@+id/myStepDetails_lineSelected" />
+
+    <FrameLayout
+        android:id="@+id/myStepDetails_fl_details"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingVertical="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/myStepDetails_bt_completeStep"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myStepDetails_lineSelected">
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/myStepDetails_bt_startStep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text="Start"
+        app:layout_constraintBottom_toBottomOf="@+id/myStepDetails_bt_completeStep"
+        app:layout_constraintEnd_toStartOf="@+id/myStepDetails_bt_completeStep"
+        app:layout_constraintTop_toTopOf="@+id/myStepDetails_bt_completeStep" />
+
+    <Button
+        android:id="@+id/myStepDetails_bt_completeStep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Complete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/myStepDetails_fl_details" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

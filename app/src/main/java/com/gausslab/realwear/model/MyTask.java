@@ -1,7 +1,6 @@
-package com.gausslab.realwear;
+package com.gausslab.realwear.model;
 
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.Exclude;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MyTask {
+    private String description;
     private String taskId;
     private String title;
     private String creatorId;
@@ -44,6 +44,16 @@ public class MyTask {
     public void setTitle(String title)
     {
         this.title = title;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 
     public ProgressStatus getProgressStatus()

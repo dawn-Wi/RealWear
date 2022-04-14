@@ -1,4 +1,4 @@
-package com.gausslab.realwear;
+package com.gausslab.realwear.mytask;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gausslab.realwear.placeholder.PlaceholderContent;
+import com.gausslab.realwear.viewmodel.MyTasksViewModel;
+import com.gausslab.realwear.R;
+import com.gausslab.realwear.model.MyTask;
 
 import java.util.List;
 

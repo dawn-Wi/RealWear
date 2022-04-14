@@ -1,4 +1,4 @@
-package com.gausslab.realwear;
+package com.gausslab.realwear.model;
 
 
 import android.graphics.drawable.Drawable;

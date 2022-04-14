@@ -1,8 +1,13 @@
-package com.gausslab.realwear;
+package com.gausslab.realwear.repository;
 
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
+import com.gausslab.realwear.FileService;
+import com.gausslab.realwear.FirebaseDataSource;
+import com.gausslab.realwear.model.MyTask;
+import com.gausslab.realwear.model.Result;
+import com.gausslab.realwear.model.TaskStep;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
@@ -10,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TaskRepository extends Repository{
+public class TaskRepository extends Repository {
     private static volatile TaskRepository INSTANCE= new TaskRepository();
     private final Map<Integer, MyTask> taskMap = new HashMap<>();
     public static TaskRepository getInstance(){return INSTANCE;}
@@ -95,6 +100,23 @@ public class TaskRepository extends Repository{
             }
         });
 
+    }
+
+    public void updateTask(MyTask toUpdate, RepositoryCallback<Result> callback)
+    {
+        firebaseDataSource.submitDataToCollection_specifiedDocumentName("tasks", "task_" + toUpdate.getTaskId(), toUpdate, new FirebaseDataSource.DataSourceCallback<Result>()
+        {
+            @Override
+            public void onComplete(Result result)
+            {
+                callback.onComplete(result);
+            }
+        });
+    }
+
+    public MyTask getTaskFromId(int taskId)
+    {
+        return taskMap.get(taskId);
     }
 
     public void setDateSource(FirebaseDataSource ds){this.firebaseDataSource = ds;}

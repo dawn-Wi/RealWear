@@ -1,13 +1,11 @@
-package com.gausslab.realwear;
+package com.gausslab.realwear.mytask;
 
-import android.os.Build;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,10 +13,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gausslab.realwear.TaskListDiffUtil;
 import com.gausslab.realwear.adapter_listener_interface.OnClickInteractionListener;
 import com.gausslab.realwear.adapter_listener_interface.OnContextMenuInteractionListener;
 import com.gausslab.realwear.adapter_listener_interface.OnItemInteractionListener;
 import com.gausslab.realwear.databinding.ObjectMytasksBinding;
+import com.gausslab.realwear.model.MyTask;
 
 import java.util.List;
 
@@ -51,20 +51,12 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
         MyTask currTask = taskList.get(position);
         holder.tv_title.setText(currTask.getTitle());
         holder.tv_location.setText("Location"); //TODO: Implement
+        holder.tv_description.setText(currTask.getDescription());
         holder.tv_manager.setText(currTask.getCreatorId()); //TODO: Change to Display Name
         //holder.tv_date.setText(currTask.getTimes().get(AssignmentStatus.ASSIGNED.name()).toDate().toString());
         holder.tv_status.setText(currTask.getProgressStatus().name());
 
-        holder.bt_options.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    holder.bt_options.showContextMenu(v.getX(), v.getY());
-                }
-            }
-        });
+
 
         if(listener != null)
         {
@@ -131,21 +123,22 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
     {
         public final TextView tv_title;
         public final TextView tv_location;
+        public final TextView tv_description;
         public final TextView tv_manager;
         public final TextView tv_date;
         public final TextView tv_status;
-        public final ImageButton bt_options;
         public final CardView card;
+
 
         public ViewHolder(@NonNull ObjectMytasksBinding binding)
         {
             super(binding.getRoot());
             tv_title = binding.objTaskListTvTitle;
             tv_location = binding.objTaskListTvLocation;
+            tv_description = binding.objTaskListTvDescription;
             tv_manager = binding.objTaskListTvManager;
             tv_date = binding.objTaskListTvDate;
             tv_status = binding.objTaskListTvStatus;
-            bt_options = binding.objTaskListBtOptions;
             card = binding.objTasklistCard;
         }
 

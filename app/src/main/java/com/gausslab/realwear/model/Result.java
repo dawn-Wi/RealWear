@@ -1,4 +1,4 @@
-package com.gausslab.realwear;
+package com.gausslab.realwear.model;
 
 /**
  * A generic class that holds a result success w/ data or an error exception.

@@ -1,5 +1,6 @@
-package com.gausslab.realwear;
+package com.gausslab.realwear.model;
 
+import com.gausslab.realwear.App;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.Exclude;
 

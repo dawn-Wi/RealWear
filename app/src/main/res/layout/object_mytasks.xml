@@ -15,22 +15,16 @@
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingVertical="5dp">
 
-            <CheckBox
-                android:id="@+id/objTaskList_cb_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/taskList_gl_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/objTaskList_tv_location"
@@ -38,10 +32,26 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:autoSizeTextType="uniform"
+                android:layout_marginTop="10dp"
                 android:maxLines="1"
                 android:text="공장 A동"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/taskList_gl_manager"
+                app:layout_constraintEnd_toStartOf="@+id/taskList_gl_location"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/objTaskList_tv_title"
+                app:layout_constraintVertical_bias="0.45" />
+
+            <TextView
+                android:id="@+id/objTaskList_tv_description"
+                style="@style/objTaskList_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
+                android:maxLines="1"
+                android:text="Description"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/taskList_gl_status"
                 app:layout_constraintStart_toStartOf="@+id/taskList_gl_location"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,9 +62,10 @@
                 android:layout_height="wrap_content"
                 android:maxLines="2"
                 android:text="Project01"
+                android:textSize="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/taskList_gl_location"
-                app:layout_constraintStart_toStartOf="@+id/taskList_gl_title"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -65,9 +76,10 @@
                 android:autoSizeTextType="uniform"
                 android:maxLines="1"
                 android:text="관리자"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/taskList_gl_date"
-                app:layout_constraintStart_toStartOf="@+id/taskList_gl_manager"
+                app:layout_constraintBottom_toTopOf="@+id/objTaskList_tv_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/taskList_gl_status"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -79,8 +91,9 @@
                 android:maxLines="1"
                 android:text="22/01/01"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/taskList_gl_status"
-                app:layout_constraintStart_toStartOf="@+id/taskList_gl_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/taskList_gl_status"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -88,72 +101,29 @@
                 style="@style/objTaskList_status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
                 android:autoSizeTextType="uniform"
                 android:maxLines="1"
                 android:padding="4dp"
                 android:text="정상"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/taskList_gl_options"
-                app:layout_constraintStart_toStartOf="@+id/taskList_gl_status"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/objTaskList_bt_options"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="#FBFBFB"
-                android:scaleType="centerInside"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/taskList_gl_options"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/dot3xml"
-                tools:ignore="SpeakableTextPresentCheck"
-                tools:srcCompat="@drawable/dot3xml" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/taskList_gl_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.1" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/taskList_gl_status"
+                app:layout_constraintTop_toBottomOf="@+id/objTaskList_tv_date" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/taskList_gl_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.3" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/taskList_gl_manager"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.45" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/taskList_gl_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.6" />
+                app:layout_constraintGuide_percent="0.23" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/taskList_gl_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.75" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/taskList_gl_options"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.9" />
+                app:layout_constraintGuide_percent="0.74" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

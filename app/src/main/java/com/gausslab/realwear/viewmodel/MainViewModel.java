@@ -1,4 +1,4 @@
-package com.gausslab.realwear;
+package com.gausslab.realwear.viewmodel;
 
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -7,6 +7,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.gausslab.realwear.App;
+import com.gausslab.realwear.FileService;
+import com.gausslab.realwear.FirebaseDataSource;
+import com.gausslab.realwear.model.ImagePinHolder;
+import com.gausslab.realwear.model.Report;
+import com.gausslab.realwear.model.Result;
 import com.google.firebase.Timestamp;
 
 import java.io.File;
