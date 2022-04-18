@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.gausslab.realwear.model.Result;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -13,6 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -23,7 +25,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FirebaseDataSource {
@@ -189,6 +190,53 @@ public class FirebaseDataSource {
         });
     }
 
+
+    public void getDocumentsFromCollection(String collectionName, DataSourceListenerCallback<Result> callback)
+    {
+        Log.d("DEBUG:DataSource", "getDocumentsFromCollection");
+        firebaseFirestore.collection(collectionName).addSnapshotListener(new EventListener<QuerySnapshot>()
+        {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error)
+            {
+                if(error == null)
+                {
+                    List<DocumentSnapshot> documentsList = value.getDocuments();
+                    Log.d("DEBUG:DataSource", "getDocumentsFromCollection: Update callback");
+                    callback.onUpdate(new Result.Success<List<DocumentSnapshot>>(documentsList));
+                }
+                else
+                {
+                    callback.onUpdate(new Result.Error(error));
+                }
+            }
+        });
+    }
+    public void getDocumentsFromCollection_whereEqualTo_whereEqualTo(String collectionName, String equalParameter1, String equalParameter2, String equalParameter3, String equalParameter4, DataSourceListenerCallback<Result> callback)
+    {
+        Log.d("DEBUG:DataSource", "getDocumentsFromCollection_whereEqualTo_whereEqualTo");
+        firebaseFirestore.collection(collectionName)
+                .whereEqualTo(equalParameter1, equalParameter2)
+                .whereEqualTo(equalParameter3, equalParameter4)
+                .addSnapshotListener(new EventListener<QuerySnapshot>()
+                {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error)
+                    {
+                        if(error == null)
+                        {
+                            List<DocumentSnapshot> documentsList = value.getDocuments();
+                            Log.d("DEBUG:DataSource", "getDocumentsFromCollection_whereEqualTo_whereEqualTo: Update callback");
+                            callback.onUpdate(new Result.Success<List<DocumentSnapshot>>(documentsList));
+                        }
+                        else
+                        {
+                            callback.onUpdate(new Result.Error(error));
+                        }
+                    }
+                });
+    }
+
     public enum KeyType
     {
         USER,
@@ -200,6 +248,11 @@ public class FirebaseDataSource {
     public interface DataSourceCallback<T>
     {
         void onComplete(T result);
+    }
+
+    public interface DataSourceListenerCallback<T>
+    {
+        void onUpdate(T result);
     }
 
 }

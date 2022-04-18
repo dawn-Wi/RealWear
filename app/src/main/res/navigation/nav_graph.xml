@@ -25,15 +25,61 @@
         tools:layout="@layout/fragment_camera" />
     <fragment
         android:id="@+id/myTasksFragment"
-        android:name="com.gausslab.realwear.MyTasksFragment"
+        android:name="com.gausslab.realwear.mytask.MyTasksFragment"
         android:label="fragment_mytasks"
-        tools:layout="@layout/fragment_mytasks" />
+        tools:layout="@layout/fragment_mytasks" >
+        <action
+            android:id="@+id/action_myTasksFragment_to_myTasksDetailsFragment"
+            app:destination="@id/myTasksDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:popEnterAnim="@anim/slide_in_right" />
+    </fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.gausslab.realwear.SplashFragment"
-        android:label="SplashFragment" >
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/myTasksDetailsFragment"
+        android:name="com.gausslab.realwear.MyTasksDetailsFragment"
+        android:label="MyTasksDetailsFragment"
+        tools:layout="@layout/fragment_mytasks_details">
+        <argument
+            android:name="taskId"
+            android:defaultValue="0"
+            app:argType="integer"/>
+        <action
+            android:id="@+id/action_myTasksDetailsFragment_to_myTasksFragment"
+            app:destination="@id/myTasksFragment"
+            app:enterAnim="@anim/slide_in_right"/>
+        <action
+            android:id="@+id/action_myTasksDetailsFragment_to_wNavigation_myStepDetailsFragment"
+            app:destination="@+id/myTaskStepFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/myTaskStepFragment"
+        android:name="com.gausslab.realwear.MyTaskStepFragment"
+        android:label="MyStepDetailsFragment"
+        tools:layout="@layout/fragment_mytask_step">
+        <argument
+            android:name="stepNumber"
+            android:defaultValue="1"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_myTaskStepFragment_to_myTasksFragment"
+            app:destination="@id/myTasksFragment" />
+        <action
+            android:id="@+id/action_myTaskStepFragment_to_myTasksDetailsFragment"
+            app:destination="@id/myTasksDetailsFragment" />
+        <action
+            android:id="@+id/action_myTaskStepFragment_self"
+            app:destination="@id/myTaskStepFragment" />
+
+    </fragment>
+
 </navigation>

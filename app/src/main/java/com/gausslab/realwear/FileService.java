@@ -14,6 +14,8 @@ import android.os.IBinder;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import com.gausslab.realwear.model.Result;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -184,6 +186,14 @@ public class FileService extends Service
     {
         getImageDrawable(App.getTaskStepImagePath(taskId, stepId), callback);
     }
+
+    public void getReportImageDrawable(String reportId, FileServiceCallback<Result<Drawable>> callback)
+    {
+        getImageDrawable(App.getReportImagePath(reportId), callback);
+    }
+
+
+    public Drawable getImageLoadingDrawable() { return getDrawable(R.drawable.imageloading_small); }
 
     public void setFirebaseDataSource(FirebaseDataSource fds)
     {

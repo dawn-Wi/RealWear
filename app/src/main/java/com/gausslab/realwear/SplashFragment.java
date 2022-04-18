@@ -9,7 +9,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.IBinder;
@@ -17,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.gausslab.realwear.repository.TaskRepository;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -66,6 +67,9 @@ public class SplashFragment extends Fragment {
             public void onServiceDisconnected(ComponentName componentName) {
             }
         };
+        Intent intent = new Intent(requireActivity(), FileService.class);
+        requireActivity().startService(intent);
+        requireActivity().bindService(intent, connection, Context.BIND_AUTO_CREATE);
 
 
     }

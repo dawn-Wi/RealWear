@@ -2,6 +2,8 @@ package com.gausslab.realwear;
 
 import androidx.recyclerview.widget.DiffUtil;
 
+import com.gausslab.realwear.model.MyTask;
+
 import java.util.List;
 
 public class TaskListDiffUtil extends DiffUtil.Callback

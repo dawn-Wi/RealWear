@@ -4,10 +4,18 @@ import android.app.Application;
 import android.content.Context;
 
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 public class App extends Application {
+    private static final MutableLiveData<Boolean> isWorking = new MutableLiveData<>(false);
     private static FileService fileService;
     private static Context mContext;
+
+    public static String getDeviceQrImagePath(String deviceId)
+    {
+        return "deviceQrImages/device_" + deviceId + ".jpg";
+    }
 
     public static String getFileProvider() {
         return "com.gausslab.realwear.fileprovider";
@@ -71,6 +79,15 @@ public class App extends Application {
             return a.equals(b);
     }
 
+    public static LiveData<Boolean> isWorking()
+    {
+        return isWorking;
+    }
+
+    public static void setIsWorking(boolean val)
+    {
+        isWorking.setValue(val);
+    }
     public static void setContext(Context c)
     {
         mContext = c;
