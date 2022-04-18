@@ -1,8 +1,11 @@
 package com.gausslab.realwear.model;
 
 import com.gausslab.realwear.App;
+import com.gausslab.realwear.ViewComponent;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.Exclude;
+
+import java.util.List;
 
 public class Report
 {
@@ -15,6 +18,7 @@ public class Report
     private boolean hasImage = false;
     private boolean imagesLoaded = false;
     private ImagePinHolder imagePinHolder;
+    private List<ViewComponent> attachedViewComponents;
 
     public Report()
     {
@@ -116,6 +120,16 @@ public class Report
 
     @Exclude
     public void setImagesLoaded(boolean loaded) { imagesLoaded = loaded; }
+
+    public List<ViewComponent> getAttachedViewComponents()
+    {
+        return attachedViewComponents;
+    }
+
+    public void setAttachedViewComponents(List<ViewComponent> attachedViewComponents)
+    {
+        this.attachedViewComponents = attachedViewComponents;
+    }
 
     @Override
     public boolean equals(Object obj)

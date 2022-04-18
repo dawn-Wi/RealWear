@@ -1,6 +1,8 @@
 package com.gausslab.realwear;
 
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 
@@ -65,6 +67,9 @@ public class SplashFragment extends Fragment {
             public void onServiceDisconnected(ComponentName componentName) {
             }
         };
+        Intent intent = new Intent(requireActivity(), FileService.class);
+        requireActivity().startService(intent);
+        requireActivity().bindService(intent, connection, Context.BIND_AUTO_CREATE);
 
 
     }

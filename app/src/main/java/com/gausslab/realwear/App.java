@@ -12,6 +12,11 @@ public class App extends Application {
     private static FileService fileService;
     private static Context mContext;
 
+    public static String getDeviceQrImagePath(String deviceId)
+    {
+        return "deviceQrImages/device_" + deviceId + ".jpg";
+    }
+
     public static String getFileProvider() {
         return "com.gausslab.realwear.fileprovider";
     }

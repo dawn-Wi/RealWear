@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.gausslab.realwear.adapter_listener_interface.OnItemInteractionListener;
 import com.gausslab.realwear.databinding.FragmentMytasksDetailsBinding;
 import com.gausslab.realwear.databinding.FragmentMytasksdetailsNewBinding;
+import com.gausslab.realwear.factory.TaskViewComponentFactory;
 import com.gausslab.realwear.model.MyTask;
 import com.gausslab.realwear.model.TaskStep;
 

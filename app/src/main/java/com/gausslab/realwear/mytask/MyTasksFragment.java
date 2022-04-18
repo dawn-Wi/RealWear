@@ -5,18 +5,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.gausslab.realwear.BasicListFragment;
 import com.gausslab.realwear.R;
 import com.gausslab.realwear.adapter_listener_interface.OnClickInteractionListener;
+import com.gausslab.realwear.adapter_listener_interface.OnMyTaskContextMenuInteractionListener;
 import com.gausslab.realwear.databinding.FragmentMytasksBinding;
 import com.gausslab.realwear.model.MyTask;
+import com.gausslab.realwear.model.ProgressStatus;
 import com.gausslab.realwear.viewmodel.MyTasksViewModel;
 
 import java.util.List;
@@ -27,6 +32,7 @@ public class MyTasksFragment extends Fragment {
     List<MyTask> myTasks;
     FrameLayout fl_taskList;
     FragmentMytasksBinding binding;
+    FragmentManager fragmentManager;
 
     public MyTasksFragment() {
 
@@ -36,6 +42,7 @@ public class MyTasksFragment extends Fragment {
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         myTasksViewModel = new ViewModelProvider(requireActivity()).get(MyTasksViewModel.class);
+        fragmentManager = getChildFragmentManager();
     }
 
     @Override
@@ -52,7 +59,26 @@ public class MyTasksFragment extends Fragment {
         fl_taskList = binding.myTasksFlTaskList;
         myTasks = myTasksViewModel.getMyTaskList();
 
-        currUserTasksAdapter = new MyTasksRecyclerViewAdapter(myTasksViewModel.getMyTaskList(), new OnClickInteractionListener<MyTask>() {
+        init();
+
+        myTasksViewModel.isCurrUserTasksUpdated().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isUpdated) {
+                if (isUpdated) {
+                    if (myTasksViewModel.getCurrUserTasks().size() == 0){
+
+                    }
+                    else{
+
+                    }
+                    currUserTasksAdapter.setTaskList(myTasksViewModel.getCurrUserTasks());
+                }
+            }
+        });
+    }
+
+    private void init(){
+        currUserTasksAdapter = new MyTasksRecyclerViewAdapter(myTasksViewModel.getMyTaskList(), new OnMyTaskContextMenuInteractionListener<MyTask>() {
             @Override
             public void onItemClick(MyTask obj) {
                 int taskId = Integer.parseInt(obj.getTaskId());
@@ -60,19 +86,30 @@ public class MyTasksFragment extends Fragment {
                 action.setTaskId(taskId);
                 NavHostFragment.findNavController(MyTasksFragment.this).navigate(action);
             }
+
+            @Override
+            public void onContextReturnTask(MyTask obj) {
+
+            }
         });
 
 
-        //프레그먼트 매니저,
-        FragmentManager fm = getChildFragmentManager();
-        Fragment myFrag = MyTasksListFragment.newInstance(1, myTasks);
-        //프래그먼트 트랜잭션 초기화
-        FragmentTransaction transaction = fm.beginTransaction();
-        //전달받은 fragment를 replace
-        transaction.replace(fl_taskList.getId(), myFrag);
-        //transaction 마무리
+        Fragment fragment = BasicListFragment.newInstance(currUserTasksAdapter);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(fl_taskList.getId(), fragment);
         transaction.commit();
+//        //프레그먼트 매니저,
+//        FragmentManager fm = getChildFragmentManager();
+//        Fragment myFrag = MyTasksListFragment.newInstance(1, myTasks);
+//        //프래그먼트 트랜잭션 초기화
+//        FragmentTransaction transaction = fm.beginTransaction();
+//        //전달받은 fragment를 replace
+//        transaction.replace(fl_taskList.getId(), myFrag);
+//        //transaction 마무리
+//        transaction.commit();
     }
+
+
 
 
 //    MyTasksViewModel myTasksViewModel;

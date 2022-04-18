@@ -187,6 +187,14 @@ public class FileService extends Service
         getImageDrawable(App.getTaskStepImagePath(taskId, stepId), callback);
     }
 
+    public void getReportImageDrawable(String reportId, FileServiceCallback<Result<Drawable>> callback)
+    {
+        getImageDrawable(App.getReportImagePath(reportId), callback);
+    }
+
+
+    public Drawable getImageLoadingDrawable() { return getDrawable(R.drawable.imageloading_small); }
+
     public void setFirebaseDataSource(FirebaseDataSource fds)
     {
         this.firebaseDataSource = fds;

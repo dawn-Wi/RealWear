@@ -65,6 +65,8 @@ public class MyTasksDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @NonNull Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         int taskId = MyTasksDetailsFragmentArgs.fromBundle(getArguments()).getTaskId();
+        myTaskDetailsViewModel.setCurrTask(taskId);
+
         fl_taskDetails = binding.myTaskDetailsFlDetails;
         tv_myTasksHeader = binding.myTaskDetailsTvNavHeader1;
         bt_complete = binding.myTaskDetailsBtCompleteTask;

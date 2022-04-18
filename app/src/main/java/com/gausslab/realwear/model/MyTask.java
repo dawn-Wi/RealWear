@@ -15,6 +15,9 @@ public class MyTask {
     private ProgressStatus progressStatus;
     private Map<String, Timestamp> times;
     private List<TaskStep> steps;
+    private String associatedDeviceId;
+    private String rejectedMessage;
+    private String associatedDeviceName;
 
     public MyTask()
     {
@@ -90,6 +93,40 @@ public class MyTask {
     public String getTaskId()
     {
         return taskId;
+    }
+
+    public String getAssociatedDeviceId()
+    {
+        return associatedDeviceId;
+    }
+
+    public String getRejectedMessage()
+    {
+        return rejectedMessage;
+    }
+    public void setRejectedMessage(String rejectedMessage)
+    {
+        this.rejectedMessage = rejectedMessage;
+    }
+
+
+    public Map<String, Timestamp> getTimes()
+    {
+        return times;
+    }
+    public void setTimes(Map<String, Timestamp> times)
+    {
+        this.times = times;
+    }
+
+    public String getAssociatedDeviceName()
+    {
+        return associatedDeviceName;
+    }
+
+    public void setAssociatedDeviceName(String associatedDeviceName)
+    {
+        this.associatedDeviceName = associatedDeviceName;
     }
 
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.gausslab.realwear.App;
+import com.gausslab.realwear.UserRepository;
 import com.gausslab.realwear.model.MyTask;
 import com.gausslab.realwear.model.ProgressStatus;
 import com.gausslab.realwear.model.Result;
@@ -18,7 +19,10 @@ import java.util.List;
 
 public class MyTasksViewModel extends ViewModel {
     private TaskRepository taskRepository = TaskRepository.getInstance();
+    private final UserRepository userRepository = UserRepository.getInstance();
     private MutableLiveData<Boolean> listLoaded = new MutableLiveData<>(false);
+
+    private final LiveData<Boolean> currUserTasksUpdated = taskRepository.isCurrUserTaskListUpdated();
 
     private List<MyTask> myTaskList;
 
@@ -70,4 +74,9 @@ public class MyTasksViewModel extends ViewModel {
     public LiveData<Boolean> isListLoaded(){return listLoaded;}
 
     public void setListLoaded(Boolean value){listLoaded.setValue(value);}
+
+    public List<MyTask> getCurrUserTasks() { return taskRepository.getCurrUserTaskList(userRepository.getCurrUser().getUserId()); }
+
+
+    public LiveData<Boolean> isCurrUserTasksUpdated() { return currUserTasksUpdated; }
 }
