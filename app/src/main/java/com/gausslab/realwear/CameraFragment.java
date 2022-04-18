@@ -1,7 +1,9 @@
 package com.gausslab.realwear;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -13,6 +15,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -84,6 +87,8 @@ public class CameraFragment extends Fragment {
                     Toast.makeText(getContext(), "보고서 제출 완료", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         ActivityResultLauncher<Intent> launchCamera = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
