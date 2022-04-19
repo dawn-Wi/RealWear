@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gausslab.realwear.viewholder.BaseViewHolder;
+import com.gausslab.realwear.ViewComponent;
 import com.gausslab.realwear.factory.ReportViewComponentFactory;
 
 import java.util.List;
