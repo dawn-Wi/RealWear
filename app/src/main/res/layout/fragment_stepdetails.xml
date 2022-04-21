@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/stepDetails_tv_header"
         style="@style/details_header"
-        android:text="Step"
+        android:text="@string/header_stepHeader"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +27,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="10dp"
-        android:text="Step content"
+        android:text="@string/label_stepdetails_stepcontent"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stepDetails_headerLine" />
@@ -68,7 +68,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Next step"
+        android:text="@string/button_nextstep"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toBottomOf="@+id/stepDetails_fl_pinList" />

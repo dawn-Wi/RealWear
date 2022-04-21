@@ -8,7 +8,7 @@
         android:id="@+id/myTaskDetails_tv_navHeader1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Tasks"
+        android:text="@string/header_mytask"
         android:textColor="@color/background_blue"
         android:textSize="25sp"
         android:textStyle="normal"
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:text="Task Details"
+        android:text="@string/header_taskdetails"
         android:textColor="@color/background_blue"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -76,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
-        android:text="Start"
+        android:text="@string/button_start"
         app:layout_constraintBottom_toBottomOf="@+id/myTaskDetails_bt_completeTask"
         app:layout_constraintEnd_toStartOf="@+id/myTaskDetails_bt_completeTask"
         app:layout_constraintTop_toTopOf="@+id/myTaskDetails_bt_completeTask" />
@@ -85,7 +85,7 @@
         android:id="@+id/myTaskDetails_bt_completeTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Complete"
+        android:text="@string/button_complete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/myTaskDetails_fl_details" />
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RealWear</string>
+    <string name="hello_blank_fragment">빈 프래그먼트</string>
+
+    <!-- Context Menu -->
+    <string name="context_edit">편집</string>
+    <string name="context_remove">삭제</string>
+    <string name="context_return">돌아가기</string>
+    <string name="context_take">가져오기</string>
+    <string name="context_menuTitle">선택</string>
+
+    <!-- Headers -->
+    <string name="header_stepHeader">단계</string>
+    <string name="header_stepDetails">단계별 상세 정보</string>
+    <string name="header_state">상태</string>
+    <string name="header_description">요약</string>
+    <string name="header_taskLocation">작업/장소</string>
+    <string name="header_mytask">내 작업</string>
+    <string name="header_taskdetails">작업 상세 정보</string>
+    <string name="header_componentText">헤더</string>
+
+
+    <!-- Labels -->
+    <string name="label_stepdetails_stepcontent">단계별 내용</string>
+    <string name="c_image_image">사진</string>
+    <string name="c_text_textview">텍스트뷰</string>
+    <string name="c_testexpandable_textview">텍스트뷰</string>
+    <string name="c_text_textview2">텍스트뷰</string>
+    <string name="c_textsubtext_textview">텍스트뷰</string>
+    <string name="c_textsubtext_content">콘텐츠</string>
+
+
+    <!-- Buttons -->
+    <string name="button_nextstep">다음 단계</string>
+    <string name="button_start">시작</string>
+    <string name="button_complete">완료</string>
+    <string name="button_retake">다시찍기</string>
+    <string name="button_submit">제출하기</string>
+    <string name="button_camera">카메라</string>
+    <string name="button_myTask">내 작업</string>
+
+    <!-- Hints -->
+
+</resources>

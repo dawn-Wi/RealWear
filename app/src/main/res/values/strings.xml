@@ -2,7 +2,6 @@
     <string name="app_name">RealWear</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="mytasks_tv_state">상태</string>
 
     <!-- Context Menu -->
     <string name="context_menuTitle">Select Action</string>
@@ -10,4 +9,38 @@
     <string name="context_remove">Remove</string>
     <string name="context_return">Return Task</string>
     <string name="context_take">Take Task</string>
+
+    <!-- Headers -->
+    <string name="header_componentText">TextView</string>
+    <string name="header_stepHeader">Step</string>
+    <string name="header_taskdetails">Task Details</string>
+    <string name="header_mytask">My Tasks</string>
+    <string name="header_taskLocation">Task/location</string>
+    <string name="header_description">Description</string>
+    <string name="header_state">state</string>
+    <string name="header_stepDetails">Step Details</string>
+
+    <!-- Labels -->
+    <string name="label_stepdetails_stepcontent">Step content</string>
+    <string name="c_image_image">Image</string>
+    <string name="c_text_textview">TextView</string>
+    <string name="c_testexpandable_textview">TextView</string>
+    <string name="c_text_textview2">TextView</string>
+    <string name="c_textsubtext_textview">TextView</string>
+    <string name="c_textsubtext_content">TextView</string>
+
+    <!-- Buttons -->
+    <string name="button_nextstep">Next step</string>
+    <string name="button_start">Start</string>
+    <string name="button_complete">Complete</string>
+    <string name="button_camera">camera</string>
+    <string name="button_myTask">myTask</string>
+    <string name="button_retake">retake</string>
+    <string name="button_submit">submit</string>
+
+    <!-- Hints -->
+
+
+
+
 </resources>

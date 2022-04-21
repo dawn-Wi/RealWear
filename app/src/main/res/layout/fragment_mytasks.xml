@@ -11,21 +11,21 @@
         style="@style/taskList_header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="상태"
+        android:text="@string/header_state"
         app:layout_constraintStart_toStartOf="@+id/taskList_gl_status"
         app:layout_constraintTop_toBottomOf="@+id/myTaskDetails_lineRight" />
 
     <TextView
         android:id="@+id/textView47"
         style="@style/taskList_header"
-        android:text="Description"
+        android:text="@string/header_description"
         app:layout_constraintStart_toStartOf="@+id/taskList_gl_location"
         app:layout_constraintTop_toBottomOf="@+id/myTaskDetails_lineRight" />
 
     <TextView
         android:id="@+id/textView41"
         style="@style/taskList_header"
-        android:text="작업/장소"
+        android:text="@string/header_taskLocation"
         app:layout_constraintEnd_toStartOf="@+id/taskList_gl_location"
         app:layout_constraintStart_toStartOf="@+id/taskList_gl_title"
         app:layout_constraintTop_toBottomOf="@+id/myTaskDetails_lineRight" />
@@ -64,7 +64,7 @@
         android:id="@+id/myTaskDetails_tv_navHeader1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Task"
+        android:text="@string/header_mytask"
         android:textColor="@color/background_blue"
         android:textSize="25dp"
         android:textStyle="bold"
