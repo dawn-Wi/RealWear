@@ -48,10 +48,6 @@ public class StepRecyclerViewAdapter extends RecyclerView.Adapter<StepRecyclerVi
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position)
     {
-//        if(stepList.get(position).getProgressStatus() == ProgressStatus.PENDING_REVIEW)
-//            holder.cardView.setCardBackgroundColor(App.getCardColor(App.ColorName.GREEN));
-//        else if(stepList.get(position).getProgressStatus() == ProgressStatus.STARTED)
-//            holder.cardView.setCardBackgroundColor(App.getCardColor(App.ColorName.YELLOW));
         holder.stepNumber.setText(stepList.get(position).getStepNumber());
         Drawable img = stepList.get(position).getPinnedImage().getImageDrawable();
         if(img != null)

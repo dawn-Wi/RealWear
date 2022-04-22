@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.gausslab.realwear.R;
 import com.gausslab.realwear.databinding.FragmentMytaskStepBinding;
 import com.gausslab.realwear.model.TaskStep;
-import com.gausslab.realwear.taskdetail.MyTaskDetailsViewModel;
+import com.gausslab.realwear.viewmodel.MyTaskDetailsViewModel;
 
 public class MyTaskStepFragment extends Fragment {
     MyTaskDetailsViewModel myTaskDetailsViewModel;

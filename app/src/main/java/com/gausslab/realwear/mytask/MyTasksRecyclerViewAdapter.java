@@ -17,9 +17,9 @@ public class MyTasksRecyclerViewAdapter extends TaskRecyclerViewAdapter{
     public MyTasksRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm) {
         super(items,mvm);
     }
-    public MyTasksRecyclerViewAdapter(List<MyTask> items, OnItemInteractionListener<MyTask> clickListener)
+    public MyTasksRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm,OnItemInteractionListener<MyTask> clickListener)
     {
-        super(items, clickListener);
+        super(items, mvm, clickListener);
     }
 
     @Override
@@ -27,23 +27,6 @@ public class MyTasksRecyclerViewAdapter extends TaskRecyclerViewAdapter{
     {
         super.onBindViewHolder(holder, position);
         MyTask task = taskList.get(position);
-//        if(task.getProgressStatus() == ProgressStatus.PENDING_REVIEW)
-//        {
-//            holder.tv_status.getBackground().setTint(App.getCardColor(App.ColorName.GREEN));
-//        }
-//        else if(task.getProgressStatus() == ProgressStatus.STARTED)
-//        {
-//            holder.tv_status.getBackground().setTint(App.getCardColor(App.ColorName.YELLOW));
-//        }
-//        else if(task.getProgressStatus() == ProgressStatus.REJECTED)
-//        {
-//            holder.tv_status.getBackground().setTint(App.getCardColor(App.ColorName.RED));
-//        }
-//        else if(task.getProgressStatus() == ProgressStatus.NOT_STARTED)
-//        {
-//            holder.tv_status.getBackground().setTint(App.getCardColor(App.ColorName.WHITE));
-//        }
-
         if(listener != null && listener instanceof OnMyTaskContextMenuInteractionListener)
         {
             holder.card.setOnClickListener(new View.OnClickListener()
@@ -79,73 +62,3 @@ public class MyTasksRecyclerViewAdapter extends TaskRecyclerViewAdapter{
         notifyDataSetChanged();
     }
 }
-
-//public class MyTasksRecyclerViewAdapter extends RecyclerView.Adapter<MyTasksRecyclerViewAdapter.ViewHolder> {
-//
-//    private List<MyTask> myTaskList;
-//    private OnItemInteractionListener<MyTask> listener;
-//    private MyTasksViewModel myTasksViewModel;
-//
-//    public MyTasksRecyclerViewAdapter(List<MyTask> items, OnItemInteractionListener<MyTask> listener){
-//        myTaskList = items;
-//        this.listener = listener;
-//    }
-//    public MyTasksRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm){
-//        myTaskList = items;
-//        myTasksViewModel = mvm;
-//    }
-////    public MyTasksRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm,OnClickInteractionListener<MyTask> listener){
-////        myTaskList = items;
-////        myTasksViewModel = mvm;
-////        this.listener = listener;
-////    }
-//
-//    @Override
-//    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-//        return new ViewHolder(ObjectMytasksBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(final ViewHolder holder, int position){
-//        MyTask currMyTask = myTaskList.get(position);
-//        holder.tv_title.setText(currMyTask.getTitle());
-//        holder.tv_description.setText(currMyTask.getDescription());
-//        holder.tv_location.setText("Location"); //TODO: Implement
-//        holder.tv_manager.setText(currMyTask.getCreatorId()); //TODO: Change to Display Name
-//        holder.tv_date.setText("2020/01/01");
-////        holder.tv_date.setText(myTaskList.get(position).getTimes().get(AssignmentStatus.ASSIGNED.name()).toDate().toString());
-//        holder.tv_status.setText(currMyTask.getProgressStatus().name());
-//    }
-//
-//    @Override
-//    public int getItemCount(){return myTaskList.size();}
-//
-//    public class ViewHolder extends RecyclerView.ViewHolder{
-//        public final TextView tv_title;
-//        public final TextView tv_location;
-//        public final TextView tv_description;
-//        public final TextView tv_manager;
-//        public final TextView tv_date;
-//        public final TextView tv_status;
-//
-//        public ViewHolder(ObjectMytasksBinding binding){
-//            super(binding.getRoot());
-//            tv_title = binding.objTaskListTvTitle;
-//            tv_location = binding.objTaskListTvLocation;
-//            tv_description = binding.objTaskListTvDescription;
-//            tv_manager = binding.objTaskListTvManager;
-//            tv_date = binding.objTaskListTvDate;
-//            tv_status = binding.objTaskListTvStatus;
-//
-//            if(listener != null && listener instanceof OnClickInteractionListener){
-//
-//            }
-//        }
-//
-//    }
-//    public void setMyTaskList(List<MyTask> newList){
-//        myTaskList = newList;
-//        notifyDataSetChanged();
-//    }
-//
-//}

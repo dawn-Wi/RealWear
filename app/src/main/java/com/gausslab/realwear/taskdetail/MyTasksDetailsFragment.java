@@ -20,6 +20,7 @@ import com.gausslab.realwear.R;
 import com.gausslab.realwear.util.adapter.adapter_listener_interface.OnClickInteractionListener;
 import com.gausslab.realwear.databinding.FragmentMytasksDetailsBinding;
 import com.gausslab.realwear.model.TaskStep;
+import com.gausslab.realwear.viewmodel.MyTaskDetailsViewModel;
 import com.gausslab.realwear.viewmodel.MyTasksViewModel;
 
 public class MyTasksDetailsFragment extends Fragment {

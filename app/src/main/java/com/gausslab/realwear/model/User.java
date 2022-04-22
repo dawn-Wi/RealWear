@@ -14,8 +14,6 @@ public class User
     private String displayName;
     private Bitmap profilePicture;
     private Position position;
-//    private ContactNumber contactNumber = new ContactNumber();
-//    private Address address = new Address();
 
     public User()
     {
@@ -71,36 +69,6 @@ public class User
         this.displayName = displayName;
     }
 
-//    public Bitmap getProfilePicture()
-//    {
-//        return profilePicture;
-//    }
-//
-//    public void setProfilePicture(Bitmap profilePicture)
-//    {
-//        this.profilePicture = profilePicture;
-//    }
-//
-//    public ContactNumber getContactNumber()
-//    {
-//        return contactNumber;
-//    }
-//
-//    public void setContactNumber(ContactNumber contactNumber)
-//    {
-//        this.contactNumber = contactNumber;
-//    }
-//
-//    public Address getAddress()
-//    {
-//        return address;
-//    }
-//
-//    public void setAddress(Address address)
-//    {
-//        this.address = address;
-//    }
-
     public Position getPosition()
     {
         return position;
@@ -111,24 +79,6 @@ public class User
         this.position = position;
     }
 
-//    public boolean equals(User u)
-//    {
-//        if(!equalHelper(userId, u.getUserId()))
-//            return false;
-//        if(!equalHelper(firebaseUid, u.getFirebaseUid()))
-//            return false;
-//        if(!equalHelper(loginId, u.getLoginId()))
-//            return false;
-//        if(!equalHelper(displayName, u.getDisplayName()))
-//            return false;
-//        if(!equalHelper(profilePicture, u.getProfilePicture()))
-//            return false;
-//        if(!equalHelper(position, u.getPosition()))
-//            return false;
-//        if(!equalHelper(contactNumber, u.getContactNumber()))
-//            return false;
-//        return equalHelper(address, u.getAddress());
-//    }
 
     @NonNull
     @Override

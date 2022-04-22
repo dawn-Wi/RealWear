@@ -25,22 +25,23 @@
             android:layout_height="match_parent"
             android:paddingVertical="5dp">
 
-
+<!--            creatorId가 필요한가?-->
             <TextView
-                android:id="@+id/objTaskList_tv_location"
+                android:id="@+id/objTaskList_tv_manager"
                 style="@style/objTaskList_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:autoSizeTextType="uniform"
                 android:layout_marginTop="10dp"
+                android:autoSizeTextType="uniform"
                 android:maxLines="1"
-                android:text="공장 A동"
+                android:text="관리자"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/taskList_gl_location"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/objTaskList_tv_title"
-                app:layout_constraintVertical_bias="0.45" />
+                app:layout_constraintVertical_bias="0.0" />
+
 
             <TextView
                 android:id="@+id/objTaskList_tv_description"
@@ -69,18 +70,19 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/objTaskList_tv_manager"
+                android:id="@+id/objTaskList_tv_location"
                 style="@style/objTaskList_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:autoSizeTextType="uniform"
                 android:maxLines="1"
-                android:text="관리자"
+                android:text="공장 A동"
                 app:layout_constraintBottom_toTopOf="@+id/objTaskList_tv_date"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/taskList_gl_status"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/objTaskList_tv_date"

@@ -28,8 +28,9 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
         myTasksViewModel = mvm;
     }
 
-    public TaskRecyclerViewAdapter(List<MyTask> items, OnItemInteractionListener<MyTask> clickListener) {
+    public TaskRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm,OnItemInteractionListener<MyTask> clickListener) {
         taskList = items;
+        myTasksViewModel = mvm;
         listener = clickListener;
     }
 
@@ -43,8 +44,9 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
         MyTask currTask = taskList.get(position);
         holder.tv_title.setText(currTask.getTitle());
         holder.tv_location.setText("Location"); //TODO: Implement
-        holder.tv_description.setText(currTask.getDescription());
-        holder.tv_manager.setText(currTask.getCreatorId()); //TODO: Change to Display Name
+        myTasksViewModel.loadTaskCreatorName(currTask.getCreatorId());
+//        holder.tv_description.setText(myTasksViewModel.loadTaskCreatorName(currTask.getCreatorId()));
+        holder.tv_manager.setText(currTask.getCreatorName()); //TODO: Change to Display Name
         //holder.tv_date.setText(currTask.getTimes().get(AssignmentStatus.ASSIGNED.name()).toDate().toString());
         holder.tv_status.setText(currTask.getProgressStatus().name());
 
@@ -90,52 +92,4 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
         }
     }
 }
-
-
-//        if(listener != null)
-//        {
-//            if(listener instanceof OnClickInteractionListener)
-//            {
-//                holder.card.setOnClickListener(new View.OnClickListener()
-//                {
-//                    @Override
-//                    public void onClick(View view)
-//                    {
-//                        ((OnClickInteractionListener<MyTask>) listener).onItemClick(taskList.get(holder.getAbsoluteAdapterPosition()));
-//                    }
-//                });
-//            }
-//            if(listener instanceof OnContextMenuInteractionListener)
-//            {
-//                holder.card.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener()
-//                {
-//                    @Override
-//                    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
-//                    {
-//                        menu.setHeaderTitle("Select Action");
-//                        MenuItem edit = menu.add(Menu.NONE, 1, 1, "Edit");
-//                        MenuItem remove = menu.add(Menu.NONE, 3, 3, "Remove");
-//                        edit.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener()
-//                        {
-//                            @Override
-//                            public boolean onMenuItemClick(MenuItem menuItem)
-//                            {
-//                                ((OnContextMenuInteractionListener<MyTask>) listener).onContextEdit(taskList.get(holder.getAbsoluteAdapterPosition()));
-//                                return true;
-//                            }
-//                        });
-//                        remove.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener()
-//                        {
-//                            @Override
-//                            public boolean onMenuItemClick(MenuItem item)
-//                            {
-//                                ((OnContextMenuInteractionListener<MyTask>) listener).onContextRemove(taskList.get(holder.getAbsoluteAdapterPosition()));
-//                                return true;
-//                            }
-//                        });
-//                    }
-//                });
-//            }
-//        }
-//    }
 

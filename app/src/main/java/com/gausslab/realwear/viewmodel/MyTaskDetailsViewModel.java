@@ -1,4 +1,4 @@
-package com.gausslab.realwear.taskdetail;
+package com.gausslab.realwear.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
