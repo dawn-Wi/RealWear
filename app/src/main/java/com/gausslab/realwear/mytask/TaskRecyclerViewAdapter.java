@@ -1,7 +1,6 @@
 package com.gausslab.realwear.mytask;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -10,8 +9,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gausslab.realwear.TaskListDiffUtil;
-import com.gausslab.realwear.adapter_listener_interface.OnItemInteractionListener;
+import com.gausslab.realwear.util.TaskListDiffUtil;
+import com.gausslab.realwear.util.adapter.adapter_listener_interface.OnItemInteractionListener;
 import com.gausslab.realwear.databinding.ObjectMytasksBinding;
 import com.gausslab.realwear.model.MyTask;
 import com.gausslab.realwear.viewmodel.MyTasksViewModel;

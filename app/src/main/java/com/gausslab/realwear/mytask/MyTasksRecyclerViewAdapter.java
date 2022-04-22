@@ -1,22 +1,13 @@
 package com.gausslab.realwear.mytask;
 
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.gausslab.realwear.App;
-import com.gausslab.realwear.adapter_listener_interface.OnClickInteractionListener;
-import com.gausslab.realwear.adapter_listener_interface.OnItemInteractionListener;
-import com.gausslab.realwear.adapter_listener_interface.OnMyTaskContextMenuInteractionListener;
-import com.gausslab.realwear.model.ProgressStatus;
+import com.gausslab.realwear.util.adapter.adapter_listener_interface.OnItemInteractionListener;
+import com.gausslab.realwear.util.adapter.adapter_listener_interface.OnMyTaskContextMenuInteractionListener;
 import com.gausslab.realwear.viewmodel.MyTasksViewModel;
-import com.gausslab.realwear.databinding.ObjectMytasksBinding;
 import com.gausslab.realwear.model.MyTask;
 
 import java.util.List;
