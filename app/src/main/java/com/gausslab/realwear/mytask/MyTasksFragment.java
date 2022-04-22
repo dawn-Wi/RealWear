@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,13 +14,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.gausslab.realwear.BasicListFragment;
-import com.gausslab.realwear.R;
-import com.gausslab.realwear.adapter_listener_interface.OnClickInteractionListener;
-import com.gausslab.realwear.adapter_listener_interface.OnMyTaskContextMenuInteractionListener;
+import com.gausslab.realwear.util.BasicListFragment;
+import com.gausslab.realwear.util.adapter.adapter_listener_interface.OnMyTaskContextMenuInteractionListener;
 import com.gausslab.realwear.databinding.FragmentMytasksBinding;
 import com.gausslab.realwear.model.MyTask;
-import com.gausslab.realwear.model.ProgressStatus;
 import com.gausslab.realwear.viewmodel.MyTasksViewModel;
 
 import java.util.List;

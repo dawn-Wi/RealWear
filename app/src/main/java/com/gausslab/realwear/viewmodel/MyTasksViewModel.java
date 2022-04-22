@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.gausslab.realwear.App;
-import com.gausslab.realwear.UserRepository;
+import com.gausslab.realwear.repository.UserRepository;
 import com.gausslab.realwear.model.MyTask;
 import com.gausslab.realwear.model.ProgressStatus;
 import com.gausslab.realwear.model.Result;

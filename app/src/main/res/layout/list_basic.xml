@@ -7,5 +7,5 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".BasicListFragment"
+    tools:context=".util.BasicListFragment"
     tools:listitem="@layout/object_mytasks" />

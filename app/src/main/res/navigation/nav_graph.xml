@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/myTasksDetailsFragment"
-        android:name="com.gausslab.realwear.MyTasksDetailsFragment"
+        android:name="com.gausslab.realwear.taskdetail.MyTasksDetailsFragment"
         android:label="MyTasksDetailsFragment"
         tools:layout="@layout/fragment_mytasks_details">
         <argument
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/myTaskStepFragment"
-        android:name="com.gausslab.realwear.MyTaskStepFragment"
+        android:name="com.gausslab.realwear.taskstep.MyTaskStepFragment"
         android:label="MyStepDetailsFragment"
         tools:layout="@layout/fragment_mytask_step">
         <argument
