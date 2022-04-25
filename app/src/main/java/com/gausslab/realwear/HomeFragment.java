@@ -65,6 +65,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 myTasksViewModel.loadMyTaskList("21");
+
 //                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_myTasksFragment);
             }
         });

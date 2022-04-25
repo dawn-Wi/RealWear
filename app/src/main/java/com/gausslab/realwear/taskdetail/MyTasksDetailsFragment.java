@@ -33,6 +33,7 @@ public class MyTasksDetailsFragment extends Fragment {
     TextView tv_myTasksHeader;
     Button bt_start;
     Button bt_complete;
+    Button bt_home;
 
 
     public MyTasksDetailsFragment() {
@@ -73,6 +74,7 @@ public class MyTasksDetailsFragment extends Fragment {
         tv_myTasksHeader = binding.myTaskDetailsTvNavHeader1;
         bt_complete = binding.myTaskDetailsBtCompleteTask;
         bt_start = binding.myTaskDetailsBtStartTask;
+        bt_home = binding.myTaskDetailsBtHome;
 
         init();
 
@@ -91,6 +93,7 @@ public class MyTasksDetailsFragment extends Fragment {
             public void onClick(View v)
             {
                 myTasksViewModel.startTask(myTaskDetailsViewModel.getCurrTask());
+                bt_start.setEnabled(false);
             }
         });
 
@@ -100,6 +103,15 @@ public class MyTasksDetailsFragment extends Fragment {
             public void onClick(View v)
             {
                 myTasksViewModel.completeTask(myTaskDetailsViewModel.getCurrTask());
+                bt_complete.setEnabled(false);
+            }
+        });
+
+        bt_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myTasksViewModel.falseListLoaded();
+                NavHostFragment.findNavController(MyTasksDetailsFragment.this).navigate(R.id.action_myTasksDetailsFragment_to_homeFragment);
             }
         });
         //endregion

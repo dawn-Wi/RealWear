@@ -22,7 +22,11 @@
         android:id="@+id/cameraFragment"
         android:name="com.gausslab.realwear.CameraFragment"
         android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myTasksFragment"
         android:name="com.gausslab.realwear.mytask.MyTasksFragment"
@@ -33,6 +37,9 @@
             app:destination="@id/myTasksDetailsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:popEnterAnim="@anim/slide_in_right" />
+        <action
+            android:id="@+id/action_myTasksFragment_to_homeFragment2"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -59,6 +66,12 @@
         <action
             android:id="@+id/action_myTasksDetailsFragment_to_wNavigation_myStepDetailsFragment"
             app:destination="@+id/myTaskStepFragment" />
+        <action
+            android:id="@+id/action_myTasksDetailsFragment_self"
+            app:destination="@id/myTasksDetailsFragment" />
+        <action
+            android:id="@+id/action_myTasksDetailsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
 
     </fragment>
     <fragment
@@ -79,6 +92,9 @@
         <action
             android:id="@+id/action_myTaskStepFragment_self"
             app:destination="@id/myTaskStepFragment" />
+        <action
+            android:id="@+id/action_myTaskStepFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
 
     </fragment>
 

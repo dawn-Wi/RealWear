@@ -102,6 +102,14 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.74" />
 
+    <Button
+        android:id="@+id/taskList_bt_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HOME"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
