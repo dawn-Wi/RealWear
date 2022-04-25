@@ -44,6 +44,10 @@ public class MyTasksViewModel extends ViewModel {
         });
     }
 
+    public void falseListLoaded(){
+        listLoaded.postValue(false);
+    }
+
     public void completeTask(MyTask mytask)
     {
         List<TaskStep> stepList = mytask.getSteps();

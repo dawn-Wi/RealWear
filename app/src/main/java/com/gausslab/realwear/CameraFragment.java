@@ -20,6 +20,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -41,6 +42,7 @@ public class CameraFragment extends Fragment {
     private ImageView imageView;
     private Button camera_bt_retake;
     private Button camera_bt_submit;
+    private Button camera_bt_home;
     FileService fileService;
     private File imageFile;
 
@@ -78,6 +80,7 @@ public class CameraFragment extends Fragment {
         imageView = view.findViewById(R.id.camera_iv_image);
         camera_bt_retake = view.findViewById(R.id.camera_bt_retake);
         camera_bt_submit = view.findViewById(R.id.camera_bt_submit);
+        camera_bt_home = view.findViewById(R.id.camera_bt_home);
 
         mainViewModel.isSubmitSuccessful().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
@@ -128,6 +131,12 @@ public class CameraFragment extends Fragment {
             }
         });
 
+        camera_bt_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(CameraFragment.this).navigate(R.id.action_cameraFragment_to_homeFragment);
+            }
+        });
     }
 
 }

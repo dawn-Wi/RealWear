@@ -21,8 +21,10 @@ import com.gausslab.realwear.R;
 import com.gausslab.realwear.databinding.FragmentMytaskStepBinding;
 import com.gausslab.realwear.model.TaskStep;
 import com.gausslab.realwear.viewmodel.MyTaskDetailsViewModel;
+import com.gausslab.realwear.viewmodel.MyTasksViewModel;
 
 public class MyTaskStepFragment extends Fragment {
+    MyTasksViewModel myTasksViewModel;
     MyTaskDetailsViewModel myTaskDetailsViewModel;
     FragmentMytaskStepBinding binding;
     FragmentManager fragmentManager;
@@ -32,6 +34,7 @@ public class MyTaskStepFragment extends Fragment {
     TextView tv_taskDetailsHeader;
     Button bt_start;
     Button bt_complete;
+    Button bt_home;
 
 
     public MyTaskStepFragment() {
@@ -49,6 +52,7 @@ public class MyTaskStepFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myTaskDetailsViewModel = new ViewModelProvider(requireActivity()).get(MyTaskDetailsViewModel.class);
+        myTasksViewModel = new ViewModelProvider(requireActivity()).get(MyTasksViewModel.class);
         fragmentManager = getChildFragmentManager();
     }
 
@@ -72,6 +76,7 @@ public class MyTaskStepFragment extends Fragment {
         tv_taskDetailsHeader = binding.myStepDetailsTvNavHeader2;
         bt_complete = binding.myStepDetailsBtCompleteStep;
         bt_start = binding.myStepDetailsBtStartStep;
+        bt_home = binding.myStepDetailsBtHome;
 
         init();
 
@@ -103,6 +108,7 @@ public class MyTaskStepFragment extends Fragment {
             public void onClick(View v)
             {
                 //Start
+                bt_start.setEnabled(false);
             }
         });
 
@@ -112,6 +118,15 @@ public class MyTaskStepFragment extends Fragment {
             public void onClick(View v)
             {
                 //Complete
+                bt_complete.setEnabled(false);
+            }
+        });
+
+        bt_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myTasksViewModel.falseListLoaded();
+                NavHostFragment.findNavController(MyTaskStepFragment.this).navigate(R.id.action_myTaskStepFragment_to_homeFragment);
             }
         });
         //endregion

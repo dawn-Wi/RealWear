@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.gausslab.realwear.R;
 import com.gausslab.realwear.util.BasicListFragment;
 import com.gausslab.realwear.util.adapter.adapter_listener_interface.OnMyTaskContextMenuInteractionListener;
 import com.gausslab.realwear.databinding.FragmentMytasksBinding;
@@ -27,6 +29,7 @@ public class MyTasksFragment extends Fragment {
     MyTasksRecyclerViewAdapter currUserTasksAdapter;
     List<MyTask> myTasks;
     FrameLayout fl_taskList;
+    Button home;
     FragmentMytasksBinding binding;
     FragmentManager fragmentManager;
 
@@ -53,7 +56,16 @@ public class MyTasksFragment extends Fragment {
     public void onViewCreated(@Nullable View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fl_taskList = binding.myTasksFlTaskList;
+        home = binding.taskListBtHome;
         myTasks = myTasksViewModel.getMyTaskList();
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myTasksViewModel.falseListLoaded();
+                NavHostFragment.findNavController(MyTasksFragment.this).navigate(R.id.action_myTasksFragment_to_homeFragment2);
+            }
+        });
 
         init();
 
@@ -71,6 +83,7 @@ public class MyTasksFragment extends Fragment {
                 }
             }
         });
+
     }
 
     private void init(){
