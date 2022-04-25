@@ -20,6 +20,7 @@ import com.gausslab.realwear.databinding.FragmentMytasksdetailsNewBinding;
 import com.gausslab.realwear.util.factory.TaskViewComponentFactory;
 import com.gausslab.realwear.model.MyTask;
 import com.gausslab.realwear.model.TaskStep;
+import com.gausslab.realwear.viewmodel.MyTaskDetailsViewModel;
 
 public class MyTasksDetailsFragment_new extends Fragment
 {

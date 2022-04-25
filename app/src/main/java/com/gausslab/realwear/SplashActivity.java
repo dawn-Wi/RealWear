@@ -38,17 +38,6 @@ public class SplashActivity extends AppCompatActivity {
         startService(intent);
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
 
-//        Intent intent = new Intent(this, FileService.class);
-//        isConnectLoaded().observe(this, new Observer<Boolean>() {
-//            @Override
-//            public void onChanged(Boolean isLoaded) {
-//                if(isLoaded){
-//                    startService(intent);
-//                    bindService(intent, connection, Context.BIND_AUTO_CREATE);
-//                    setContentView(R.layout.activity_splash);
-//                }
-//            }
-//        });
 
 
     }
@@ -56,18 +45,6 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//
-//        Intent i = new Intent(this, MainActivity.class);
-//        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-////        startActivity(i);
-//        isConnectLoaded().observe(this, new Observer<Boolean>() {
-//            @Override
-//            public void onChanged(Boolean isLoaded) {
-//                if (isLoaded) {
-//                    startActivity(i);
-//                }
-//            }
-//        });
     }
 
     public LiveData<Boolean> isConnectLoaded() {

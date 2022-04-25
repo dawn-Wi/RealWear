@@ -15,9 +15,9 @@
     <string name="header_stepHeader">Step</string>
     <string name="header_taskdetails">Task Details</string>
     <string name="header_mytask">My Tasks</string>
-    <string name="header_taskLocation">Task/location</string>
+    <string name="header_taskAndManager">Task/Manager</string>
     <string name="header_description">Description</string>
-    <string name="header_state">state</string>
+    <string name="header_locationState">Location/state</string>
     <string name="header_stepDetails">Step Details</string>
 
     <!-- Labels -->

@@ -11,7 +11,7 @@
         style="@style/taskList_header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/header_state"
+        android:text="@string/header_locationState"
         app:layout_constraintStart_toStartOf="@+id/taskList_gl_status"
         app:layout_constraintTop_toBottomOf="@+id/myTaskDetails_lineRight" />
 
@@ -25,7 +25,7 @@
     <TextView
         android:id="@+id/textView41"
         style="@style/taskList_header"
-        android:text="@string/header_taskLocation"
+        android:text="@string/header_taskAndManager"
         app:layout_constraintEnd_toStartOf="@+id/taskList_gl_location"
         app:layout_constraintStart_toStartOf="@+id/taskList_gl_title"
         app:layout_constraintTop_toBottomOf="@+id/myTaskDetails_lineRight" />

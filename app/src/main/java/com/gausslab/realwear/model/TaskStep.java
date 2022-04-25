@@ -46,26 +46,6 @@ public class TaskStep
         this.stepNumber = stepNumber;
     }
 
-//    @Override
-//    public boolean equals(Object obj)
-//    {
-//        if(!(obj instanceof TaskStep))
-//            return false;
-//        TaskStep compareStep = (TaskStep) obj;
-//        if(!equalHelper(stepNumber, compareStep.getStepNumber()))
-//            return false;
-//        if(!equalHelper(textContent, compareStep.getTextContent()))
-//            return false;
-//        if(!equalHelper(progressStatus, compareStep.getProgressStatus()))
-//            return false;
-//        if(!equalHelper(startTime, compareStep.getStartTime()))
-//            return false;
-//        if(!equalHelper(finishTime, compareStep.getFinishTime()))
-//            return false;
-//        if(!equalHelper(pinnedImage, compareStep.getPinnedImage()))
-//            return false;
-//        return equalHelper(downloadUrl, compareStep.getDownloadUrl());
-//    }
 
     public String getTextContent()
     {

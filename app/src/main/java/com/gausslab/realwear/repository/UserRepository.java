@@ -31,47 +31,6 @@ public class UserRepository extends Repository
         return INSTANCE;
     }
 
-//    public void tryLogin(final String username, final String password, final RepositoryListenerCallback<Result> callback)
-//    {
-//        firebaseDataSource.auth_login(username, password, result ->
-//        {
-//            if(result instanceof Result.Success)
-//            {
-//                FirebaseUser firebaseUser = ((Result.Success<FirebaseUser>) result).getData();
-//                getUser(firebaseUser.getUid(), callback);
-//            }
-//            else
-//                callback.onUpdate(result);
-//        });
-//    }
-
-//    public void tryRegister(final String username, final String password, final String userDisplayName, final RepositoryListenerCallback<Result> callback)
-//    {
-//        firebaseDataSource.getNewKey(FirebaseDataSource.KeyType.USER, result ->
-//        {
-//            if(result instanceof Result.Success)
-//            {
-//                String newKey = ((Result.Success<String>) result).getData();
-//                firebaseDataSource.auth_register(username, password, result2 ->
-//                {
-//                    if(result2 instanceof Result.Success)
-//                    {
-//                        String firebaseUid = ((Result.Success<String>) result2).getData();
-//                        User toCreate = new User(newKey, firebaseUid, username, userDisplayName, User.Position.WORKER);
-//                        createUser(toCreate);
-//                        callback.onUpdate(new Result.Success<String>("Success"));
-//                    }
-//                    else
-//                        callback.onUpdate(result2);
-//                });
-//            }
-//            else
-//            {
-//                callback.onUpdate(result);
-//            }
-//        });
-//    }
-
     public void savedLogin(String firebaseUid, RepositoryListenerCallback<Result> callback)
     {
         firebaseDataSource.getDocumentsFromCollection_whereEqualTo_once("users", "firebaseUid", firebaseUid, new FirebaseDataSource.DataSourceCallback<Result>()
@@ -104,31 +63,13 @@ public class UserRepository extends Repository
         currUser = null;
     }
 
-    private void createUser(User toCreate)
-    {
+    private void createUser(User toCreate) {
         Map<String, Object> toAdd = new HashMap<>();
         toAdd.put("userId", toCreate.getUserId());
         toAdd.put("displayName", toCreate.getDisplayName());
         toAdd.put("loginId", toCreate.getLoginId());
         toAdd.put("firebaseUid", toCreate.getFirebaseUid());
         toAdd.put("position", toCreate.getPosition().toString());
-        //toAdd.put("phoneNumber", toCreate.getContactNumber().getMobileNumber());
-
-//        firebaseDataSource.submitDataToCollection_autoDocumentName("users", toAdd, new FirebaseDataSource.DataSourceCallback<Result>()
-//        {
-//            @Override
-//            public void onComplete(Result result)
-//            {
-//                if(result instanceof Result.Success)
-//                {
-//                    Log.d("DEBUG", "UserRepository : createUser() : Success");
-//                }
-//                else
-//                {
-//                    Log.d("DEBUG", "UserRepository : createUser() : Failed");
-//                }
-//            }
-//        });
     }
 
     public void loadUserList()

@@ -56,6 +56,7 @@ public class TaskViewComponentFactory
     {
         List<ViewComponent> toReturn = new ArrayList<>();
         toReturn.add(new ViewComponent(VIEW_TYPE_TEXT_HEADER, new ComponentData("", task.getDescription())));
+//        toReturn.add(new ViewComponent(VIEW_TYPE_TEXT_HEADER,new ComponentData("", task.getCreatorName())));
 
         List<ViewComponent> statusSubList = new ArrayList<>();
         if(task.getRejectedMessage() != null && task.getRejectedMessage().length() > 0)

@@ -13,9 +13,9 @@
     <!-- Headers -->
     <string name="header_stepHeader">단계</string>
     <string name="header_stepDetails">단계별 상세 정보</string>
-    <string name="header_state">상태</string>
+    <string name="header_locationState">장소/상태</string>
     <string name="header_description">요약</string>
-    <string name="header_taskLocation">작업/장소</string>
+    <string name="header_taskAndManager">작업/담당 관리자</string>
     <string name="header_mytask">내 작업</string>
     <string name="header_taskdetails">작업 상세 정보</string>
     <string name="header_componentText">헤더</string>

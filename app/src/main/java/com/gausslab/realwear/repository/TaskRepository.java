@@ -29,6 +29,7 @@ public class TaskRepository extends Repository {
     private FirebaseDataSource firebaseDataSource;
     private List<MyTask> myTaskList;
     private List<MyTask> currUserTaskList;
+    private List<String> nameList;
 
     public void loadMyTaskList(final String id, final TaskRepositoryCallback<Result> callback){
         firebaseDataSource.getDocumentsFromCollection_whereEqualTo_once("tasks", "assignedUserId", id, new FirebaseDataSource.DataSourceCallback<Result>() {
@@ -47,6 +48,8 @@ public class TaskRepository extends Repository {
             }
         });
     }
+
+
 
     private void getTasksFromDocumentSnapshots(List<DocumentSnapshot> documents, RepositoryListenerCallback<Result> callback)
     {
@@ -109,6 +112,48 @@ public class TaskRepository extends Repository {
         });
 
     }
+
+//    public void loadTaskCreatorName(final String id, final TaskRepositoryCallback<Result> callback){
+//        firebaseDataSource.getDocumentsFromCollection_whereEqualTo_once("users", "userId", id, new FirebaseDataSource.DataSourceCallback<Result>() {
+//            @Override
+//            public void onComplete(Result result) {
+//                if(result instanceof Result.Success){
+//                    List<DocumentSnapshot> documents = ((Result.Success<List<DocumentSnapshot>>)result).getData();
+//                    getNameFromDocumentSnapshots(documents, new RepositoryListenerCallback<Result>() {
+//                        @Override
+//                        public void onUpdate(Result result) {
+//                            nameList = ((Result.Success<List<String>>)result).getData();
+//                            callback.onComplete(result);
+//                        }
+//                    });
+//                }
+//            }
+//        });
+//    }
+//
+//    private void getNameFromDocumentSnapshots(List<DocumentSnapshot> documents, RepositoryListenerCallback<Result> callback)
+//    {
+//        executor.execute(new Runnable()
+//        {
+//            @Override
+//            public void run()
+//            {
+//                Log.d("DEBUG", "Executor run getTasksFromDocumentSnapshots " + executor.toString());
+//                List<String> toReturn = new ArrayList<>();
+//                for(DocumentSnapshot doc : documents)
+//                {
+//                    MyTask nameToAdd = doc.toObject(MyTask.class);
+//                   for(int i=0;i<documents.size();i++){
+//                       String toAdd = new String((documents.get(i).getString("displayName")));
+//                       toReturn.add(toAdd);
+//                   }
+//                    toReturn.add(String.valueOf(nameToAdd));
+//                }
+//                callback.onUpdate(new Result.Success<List<String>>(toReturn));
+//            }
+//        });
+//
+//    }
 
     public List<MyTask> getCurrUserTaskList(String userId)
     {

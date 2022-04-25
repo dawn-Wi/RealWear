@@ -12,6 +12,7 @@ public class MyTask {
     private String taskId;
     private String title;
     private String creatorId;
+    private String creatorUserDisplayName;
     private ProgressStatus progressStatus;
     private Map<String, Timestamp> times;
     private List<TaskStep> steps;
@@ -24,16 +25,7 @@ public class MyTask {
         steps = new ArrayList<TaskStep>();
         times = new HashMap<String, Timestamp>();
         progressStatus = ProgressStatus.NOT_STARTED;
-//        assignmentStatus = AssignmentStatus.UNASSIGNED;
-//        currStep = -1;
     }
-
-//    public MyTask(String title , String creatorId, String progressStatus) {
-//        this.title = title;
-//        this.creatorId = creatorId;
-//        times = new HashMap<String, Timestamp>();
-//        this.progressStatus = ProgressStatus.NOT_STARTED;
-//    }
     public void addTime(String key, Timestamp time)
     {
         times.put(key, time);
@@ -79,6 +71,17 @@ public class MyTask {
     {
         this.creatorId = creatorId;
     }
+
+    public String getCreatorUserDisplayName()
+    {
+        return creatorUserDisplayName;
+    }
+
+    public void setCreatorUserDisplayName(String creatorUserDisplayName)
+    {
+        this.creatorUserDisplayName = creatorUserDisplayName;
+    }
+
 
     public List<TaskStep> getSteps()
     {

@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.gausslab.realwear.util.BasicListFragment;
 import com.gausslab.realwear.R;
-import com.gausslab.realwear.taskdetail.MyTaskDetailsViewModel;
+import com.gausslab.realwear.viewmodel.MyTaskDetailsViewModel;
 import com.gausslab.realwear.util.adapter.ImagePinRecyclerViewAdapter;
 import com.gausslab.realwear.databinding.FragmentStepdetailsBinding;
 import com.gausslab.realwear.model.TaskStep;
@@ -94,12 +94,8 @@ public class StepDetailsFragment extends Fragment
 
         if(listener == null)
         {
-//            bt_complete.setVisibility(View.GONE);
             bt_nextStep.setVisibility(View.GONE);
         }
-
-//        if(currTaskStep.getProgressStatus() == ProgressStatus.PENDING_REVIEW)
-//            bt_complete.setEnabled(false);
 
         String s = " " + currTaskStep.getStepNumber() + "/" + maxStepNumber;
         tv_header.append(s);

@@ -102,18 +102,6 @@ public class DeviceRepository extends Repository
         });
     }
 
-//    public void removeDevice(String deviceId, RepositoryListenerCallback<Result> callback)
-//    {
-//        firebaseDataSource.removeDocumentsFromCollection_whereEqualTo("devices", "deviceId", deviceId, new FirebaseDataSource.DataSourceCallback<Result>()
-//        {
-//            @Override
-//            public void onComplete(Result result)
-//            {
-//                callback.onUpdate(result);
-//            }
-//        });
-//    }
-
     public List<Device> getDeviceList()
     {
         return new ArrayList<Device>(deviceMap.values());
@@ -134,15 +122,6 @@ public class DeviceRepository extends Repository
             return null;
     }
 
-//    public Drawable getQrDrawable(String deviceId)
-//    {
-//        return deviceQrDrawableMap.get(deviceId);
-//    }
-//
-//    public File getQrFileForDevice(String deviceId)
-//    {
-//        return fileService.getFile(App.getDeviceQrImagePath(deviceId));
-//    }
 
     private void generateDeviceQr(Device device, RepositoryCallback<Result> callback)
     {
@@ -249,83 +228,6 @@ public class DeviceRepository extends Repository
         });
     }
 
-//    public void loadQrDrawableForDevice(String deviceId, RepositoryCallback<Result> callback)
-//    {
-//        callback.onComplete(new Result.Loading("Loading QR drawable for : " + deviceId));
-//        fileService.getImageDrawable(App.getDeviceQrImagePath(deviceId), new FileService.FileServiceCallback<Result<Drawable>>()
-//        {
-//            @Override
-//            public void onComplete(Result result)
-//            {
-//                if(result instanceof Result.Success)
-//                {
-//                    Drawable drawable = ((Result.Success<Drawable>) result).getData();
-//                    deviceQrDrawableMap.put(deviceId, drawable);
-//                    qrLoadedMap.get(deviceId).postValue(true);
-//                }
-//                callback.onComplete(result);
-//            }
-//        });
-//    }
-
-//    private void loadAllQrDrawables(RepositoryCallback<Result> callback)
-//    {
-//        deviceQrDrawableMap = new HashMap<>();
-//        List<Device> deviceList = getDeviceList();
-//        final int[] count = {0};
-//        for(Device d : deviceList)
-//        {
-//            if(d.getQrDownloadUrl() != null)
-//            {
-//                count[0]++;
-//                fileService.getImageDrawable(App.getDeviceQrImagePath(d.getDeviceId()), new FileService.FileServiceCallback<Result<Drawable>>()
-//                {
-//                    @Override
-//                    public void onComplete(Result result)
-//                    {
-//                        if(result instanceof Result.Success)
-//                        {
-//                            Drawable draw = ((Result.Success<Drawable>) result).getData();
-//                            deviceQrDrawableMap.put(d.getDeviceId(), draw);
-//                        }
-//                        count[0]--;
-//                        if(count[0] == 0)
-//                            callback.onComplete(new Result.Success<>("Finished"));
-//                    }
-//                });
-//            }
-//        }
-//    }
-
-//    private void loadAllDeviceDrawables(RepositoryCallback<Result> callback)
-//    {
-//        deviceImageDrawableMap = new HashMap<>();
-//        List<Device> deviceList = getDeviceList();
-//        final int[] count = {0};
-//        for(Device d : deviceList)
-//        {
-//            if(d.getImageDownloadUrl() != null)
-//            {
-//                count[0]++;
-//                fileService.getImageDrawable(App.getDeviceImagePath(d.getDeviceId()), new FileService.FileServiceCallback<Result<Drawable>>()
-//                {
-//                    @Override
-//                    public void onComplete(Result result)
-//                    {
-//                        if(result instanceof Result.Success)
-//                        {
-//                            Drawable draw = ((Result.Success<Drawable>) result).getData();
-//                            deviceImageDrawableMap.put(d.getDeviceId(), draw);
-//                        }
-//                        count[0]--;
-//                        if(count[0] == 0)
-//                            callback.onComplete(new Result.Success<>("Finished"));
-//                    }
-//                });
-//            }
-//        }
-//    }
-
     public LiveData<Boolean> isDeviceListUpdated() { return deviceListUpdated; }
 
     public LiveData<Boolean> isDataLoaded() { return dataLoaded; }
@@ -361,49 +263,6 @@ public class DeviceRepository extends Repository
 
     }
 
-    /*DO NOT USE
-    public void loadAllDownloadUrl()
-    {
-        if(deviceMap == null)
-            getDeviceList(new RepositoryCallback<Result>()
-            {
-                @Override
-                public void onComplete(Result result)
-                {
-                    if(result instanceof Result.Success)
-                    {
-                        List<Device> deviceList = ((Result.Success<List<Device>>) result).getData();
-                        for(Device d : deviceList)
-                        {
-                            firebaseDataSource.getDownloadUrl(App.getDeviceQrImagePath(d.getDeviceId()), new FirebaseDataSource.DataSourceCallback<Result>()
-                            {
-                                @Override
-                                public void onComplete(Result result)
-                                {
-                                    if(result instanceof Result.Success)
-                                    {
-                                        Uri downloadUrl = ((Result.Success<Uri>) result).getData();
-                                        d.setQrDownloadUrl(downloadUrl.toString());
-                                        firebaseDataSource.submitDataToCollection_specifiedDocumentName("devices", "device_" + d.getDeviceId(), d, new FirebaseDataSource.DataSourceCallback<Result>()
-                                        {
-                                            @Override
-                                            public void onComplete(Result result)
-                                            {
-                                                Log.d("DEBUG", "DeviceRepository : loadAllDownloadUrl() : Device #" + d.getDeviceId() + " updated!");
-                                            }
-                                        });
-                                    }
-                                }
-                            });
-                        }
-                    }
-                    else
-                    {
-
-                    }
-                }
-            });
-    }*/
 }
 
 
