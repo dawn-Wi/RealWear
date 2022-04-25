@@ -172,26 +172,6 @@ public class FirebaseDataSource {
                 });
     }
 
-    public void getTaskCreatorName(String id, DataSourceCallback<Result> callback){
-        List<String> toReturn = new ArrayList<>();
-        firebaseFirestore.collection("users")
-                .whereEqualTo("userId",id)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            List<DocumentSnapshot> documentList = task.getResult().getDocuments();
-                            for(int i = 0; i<documentList.size(); i++){
-                                String toAdd = new String((documentList.get(i).getString("displayName")));
-                                toReturn.add(toAdd);
-                            }
-                            callback.onComplete(new Result.Success<List<String>>(toReturn));
-                        }
-                    }
-                });
-    }
-
     public void downloadFile(String downloadPath, File localFile, DataSourceCallback<Result> callback)
     {
         Log.d("DEBUG:DataSource", "downloadFile: " + downloadPath);

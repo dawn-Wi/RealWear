@@ -25,7 +25,6 @@
             android:layout_height="match_parent"
             android:paddingVertical="5dp">
 
-<!--            creatorId가 필요한가?-->
             <TextView
                 android:id="@+id/objTaskList_tv_manager"
                 style="@style/objTaskList_text"
@@ -49,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:autoSizeTextType="uniform"
-                android:maxLines="1"
+                android:maxLines="3"
                 android:text="Description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/taskList_gl_status"

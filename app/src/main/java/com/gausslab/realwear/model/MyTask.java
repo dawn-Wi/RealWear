@@ -12,7 +12,7 @@ public class MyTask {
     private String taskId;
     private String title;
     private String creatorId;
-    private String creatorName;
+    private String creatorUserDisplayName;
     private ProgressStatus progressStatus;
     private Map<String, Timestamp> times;
     private List<TaskStep> steps;
@@ -72,14 +72,14 @@ public class MyTask {
         this.creatorId = creatorId;
     }
 
-    public String getCreatorName()
+    public String getCreatorUserDisplayName()
     {
-        return creatorName;
+        return creatorUserDisplayName;
     }
 
-    public void setCreatorName(String creatorName)
+    public void setCreatorUserDisplayName(String creatorUserDisplayName)
     {
-        this.creatorName = creatorName;
+        this.creatorUserDisplayName = creatorUserDisplayName;
     }
 
 

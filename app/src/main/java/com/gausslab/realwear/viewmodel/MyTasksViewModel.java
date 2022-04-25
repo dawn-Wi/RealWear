@@ -25,7 +25,6 @@ public class MyTasksViewModel extends ViewModel {
     private final LiveData<Boolean> currUserTasksUpdated = taskRepository.isCurrUserTaskListUpdated();
 
     private List<MyTask> myTaskList;
-    private List<String> name;
 
     public void startTask(MyTask mytask)
     {
@@ -41,14 +40,6 @@ public class MyTasksViewModel extends ViewModel {
             }
             else{
                 listLoaded.postValue(false);
-            }
-        });
-    }
-
-    public void loadTaskCreatorName(String id){
-        taskRepository.loadTaskCreatorName(id, result -> {
-            if(result instanceof Result.Success){
-                name = ((Result.Success<List<String>>)result).getData();
             }
         });
     }
@@ -79,8 +70,6 @@ public class MyTasksViewModel extends ViewModel {
     }
 
     public List<MyTask> getMyTaskList(){return myTaskList;}
-
-    public List<String> getName(){return name;}
 
     public LiveData<Boolean> isListLoaded(){return listLoaded;}
 

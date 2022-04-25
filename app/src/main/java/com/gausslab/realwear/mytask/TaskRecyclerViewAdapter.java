@@ -1,5 +1,7 @@
 package com.gausslab.realwear.mytask;
 
+import static com.google.android.gms.common.internal.safeparcel.SafeParcelable.NULL;
+
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -44,9 +46,13 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
         MyTask currTask = taskList.get(position);
         holder.tv_title.setText(currTask.getTitle());
         holder.tv_location.setText("Location"); //TODO: Implement
-        myTasksViewModel.loadTaskCreatorName(currTask.getCreatorId());
-//        holder.tv_description.setText(myTasksViewModel.loadTaskCreatorName(currTask.getCreatorId()));
-        holder.tv_manager.setText(currTask.getCreatorName()); //TODO: Change to Display Name
+//        myTasksViewModel.loadTaskCreatorName(currTask.getCreatorId());
+        holder.tv_description.setText(currTask.getDescription());
+        if(currTask.getCreatorUserDisplayName()==null){
+            holder.tv_manager.setText(currTask.getCreatorId());
+        }else{
+            holder.tv_manager.setText(currTask.getCreatorUserDisplayName());
+        }
         //holder.tv_date.setText(currTask.getTimes().get(AssignmentStatus.ASSIGNED.name()).toDate().toString());
         holder.tv_status.setText(currTask.getProgressStatus().name());
 
