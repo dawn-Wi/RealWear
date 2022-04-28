@@ -118,6 +118,7 @@ public class MyTaskStepFragment extends Fragment {
             public void onClick(View v)
             {
                 //Complete
+                bt_start.setEnabled(false);
                 bt_complete.setEnabled(false);
             }
         });

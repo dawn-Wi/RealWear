@@ -103,6 +103,7 @@ public class MyTasksDetailsFragment extends Fragment {
             public void onClick(View v)
             {
                 myTasksViewModel.completeTask(myTaskDetailsViewModel.getCurrTask());
+                bt_start.setEnabled(false);
                 bt_complete.setEnabled(false);
             }
         });
