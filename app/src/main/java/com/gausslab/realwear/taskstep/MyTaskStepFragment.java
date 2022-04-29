@@ -108,6 +108,7 @@ public class MyTaskStepFragment extends Fragment {
             public void onClick(View v)
             {
                 //Start
+                myTasksViewModel.startTask(myTaskDetailsViewModel.getCurrTask());
                 bt_start.setEnabled(false);
             }
         });
@@ -118,6 +119,7 @@ public class MyTaskStepFragment extends Fragment {
             public void onClick(View v)
             {
                 //Complete
+                myTasksViewModel.completeTask(myTaskDetailsViewModel.getCurrTask());
                 bt_start.setEnabled(false);
                 bt_complete.setEnabled(false);
             }

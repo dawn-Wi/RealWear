@@ -37,6 +37,7 @@
     <string name="button_myTask">myTask</string>
     <string name="button_retake">retake</string>
     <string name="button_submit">submit</string>
+    <string name="button_home">HOME</string>
 
     <!-- Hints -->
 

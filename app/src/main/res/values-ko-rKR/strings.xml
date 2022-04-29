@@ -39,6 +39,7 @@
     <string name="button_submit">제출하기</string>
     <string name="button_camera">카메라</string>
     <string name="button_myTask">내 작업</string>
+    <string name="button_home">HOME</string>
 
     <!-- Hints -->
 
