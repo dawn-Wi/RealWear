@@ -16,29 +16,32 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.gausslab.realwear.R;
+import com.gausslab.realwear.databinding.FragmentMytasksBinding;
+import com.gausslab.realwear.model.Task;
 import com.gausslab.realwear.util.BasicListFragment;
 import com.gausslab.realwear.util.adapter.adapter_listener_interface.OnMyTaskContextMenuInteractionListener;
-import com.gausslab.realwear.databinding.FragmentMytasksBinding;
-import com.gausslab.realwear.model.MyTask;
 import com.gausslab.realwear.viewmodel.MyTasksViewModel;
 
 import java.util.List;
 
-public class MyTasksFragment extends Fragment {
+public class MyTasksFragment extends Fragment
+{
     MyTasksViewModel myTasksViewModel;
     MyTasksRecyclerViewAdapter currUserTasksAdapter;
-    List<MyTask> myTasks;
+    List<Task> tasks;
     FrameLayout fl_taskList;
     Button home;
     FragmentMytasksBinding binding;
     FragmentManager fragmentManager;
 
-    public MyTasksFragment() {
+    public MyTasksFragment()
+    {
 
     }
 
     @Override
-    public void onCreate(Bundle saveInstanceState) {
+    public void onCreate(Bundle saveInstanceState)
+    {
         super.onCreate(saveInstanceState);
         myTasksViewModel = new ViewModelProvider(requireActivity()).get(MyTasksViewModel.class);
         fragmentManager = getChildFragmentManager();
@@ -46,50 +49,51 @@ public class MyTasksFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         binding = FragmentMytasksBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@Nullable View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@Nullable View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
         fl_taskList = binding.myTasksFlTaskList;
         home = binding.taskListBtHome;
-        myTasks = myTasksViewModel.getMyTaskList();
+        tasks = myTasksViewModel.getMyTaskList();
+        init();
 
-        home.setOnClickListener(new View.OnClickListener() {
+        home.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                myTasksViewModel.falseListLoaded();
+            public void onClick(View view)
+            {
                 NavHostFragment.findNavController(MyTasksFragment.this).navigate(R.id.action_myTasksFragment_to_homeFragment2);
             }
         });
 
-        init();
-
-        myTasksViewModel.isCurrUserTasksUpdated().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+        myTasksViewModel.isCurrUserTasksUpdated().observe(getViewLifecycleOwner(), new Observer<Boolean>()
+        {
             @Override
-            public void onChanged(Boolean isUpdated) {
-                if (isUpdated) {
-                    if (myTasksViewModel.getCurrUserTasks().size() == 0){
-
-                    }
-                    else{
-
-                    }
+            public void onChanged(Boolean isUpdated)
+            {
+                if(isUpdated)
+                {
                     currUserTasksAdapter.setTaskList(myTasksViewModel.getCurrUserTasks());
                 }
             }
         });
-
     }
 
-    private void init(){
-        currUserTasksAdapter = new MyTasksRecyclerViewAdapter(myTasksViewModel.getMyTaskList(), myTasksViewModel, new OnMyTaskContextMenuInteractionListener<MyTask>() {
+    private void init()
+    {
+        currUserTasksAdapter = new MyTasksRecyclerViewAdapter(myTasksViewModel.getMyTaskList(), myTasksViewModel, new OnMyTaskContextMenuInteractionListener<Task>()
+        {
             @Override
-            public void onItemClick(MyTask obj) {
+            public void onItemClick(Task obj)
+            {
                 int taskId = Integer.parseInt(obj.getTaskId());
                 MyTasksFragmentDirections.ActionMyTasksFragmentToMyTasksDetailsFragment action = MyTasksFragmentDirections.actionMyTasksFragmentToMyTasksDetailsFragment();
                 action.setTaskId(taskId);
@@ -97,7 +101,8 @@ public class MyTasksFragment extends Fragment {
             }
 
             @Override
-            public void onContextReturnTask(MyTask obj) {
+            public void onContextReturnTask(Task obj)
+            {
 
             }
         });
@@ -107,8 +112,6 @@ public class MyTasksFragment extends Fragment {
         transaction.replace(fl_taskList.getId(), fragment);
         transaction.commit();
     }
-
-
 
 
 }

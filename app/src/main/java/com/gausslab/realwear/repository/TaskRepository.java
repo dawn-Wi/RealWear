@@ -9,8 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.gausslab.realwear.FileService;
 import com.gausslab.realwear.FirebaseDataSource;
 import com.gausslab.realwear.model.AssignmentStatus;
-import com.gausslab.realwear.model.MyTask;
 import com.gausslab.realwear.model.Result;
+import com.gausslab.realwear.model.Task;
 import com.gausslab.realwear.model.TaskStep;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -19,37 +19,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TaskRepository extends Repository {
-    private static volatile TaskRepository INSTANCE= new TaskRepository();
-    private final Map<Integer, MyTask> taskMap = new HashMap<>();
-    public static TaskRepository getInstance(){return INSTANCE;}
-
-
+public class TaskRepository extends Repository
+{
+    private static volatile TaskRepository INSTANCE = new TaskRepository();
+    private final Map<Integer, Task> taskMap = new HashMap<>();
     private final MutableLiveData<Boolean> currUserTaskListUpdated = new MutableLiveData<>(false);
     private FirebaseDataSource firebaseDataSource;
-    private List<MyTask> myTaskList;
-    private List<MyTask> currUserTaskList;
-    private List<String> nameList;
+    private List<Task> currUserTaskList;
 
-    public void loadMyTaskList(final String id, final TaskRepositoryCallback<Result> callback){
-        firebaseDataSource.getDocumentsFromCollection_whereEqualTo_once("tasks", "assignedUserId", id, new FirebaseDataSource.DataSourceCallback<Result>() {
+    public static TaskRepository getInstance() {return INSTANCE;}
+
+    public void loadMyTaskList(final String id)
+    {
+        firebaseDataSource.getDocumentsFromCollection_whereEqualTo_whereNotEqualTo("tasks", "assignedUserId", id, "assignmentStatus", AssignmentStatus.CLOSED.toString(), new FirebaseDataSource.DataSourceListenerCallback<Result<List<DocumentSnapshot>>>()
+        {
             @Override
-            public void onComplete(Result result) {
-                if(result instanceof Result.Success){
-                    List<DocumentSnapshot> documents = ((Result.Success<List<DocumentSnapshot>>)result).getData();
-                    getTasksFromDocumentSnapshots(documents, new RepositoryListenerCallback<Result>() {
+            public void onUpdate(Result<List<DocumentSnapshot>> result)
+            {
+                if(result instanceof Result.Success)
+                {
+                    List<DocumentSnapshot> documents = ((Result.Success<List<DocumentSnapshot>>) result).getData();
+                    getTasksFromDocumentSnapshots(documents, new RepositoryListenerCallback<Result>()
+                    {
                         @Override
-                        public void onUpdate(Result result) {
-                            myTaskList = ((Result.Success<List<MyTask>>)result).getData();
-                            callback.onComplete(result);
+                        public void onUpdate(Result result)
+                        {
+                            currUserTaskList = ((Result.Success<List<Task>>) result).getData();
+                            currUserTaskListUpdated.postValue(true);
                         }
                     });
                 }
             }
         });
     }
-
-
 
     private void getTasksFromDocumentSnapshots(List<DocumentSnapshot> documents, RepositoryListenerCallback<Result> callback)
     {
@@ -59,10 +61,10 @@ public class TaskRepository extends Repository {
             public void run()
             {
                 Log.d("DEBUG", "Executor run getTasksFromDocumentSnapshots " + executor.toString());
-                List<MyTask> toReturn = new ArrayList<>();
+                List<Task> toReturn = new ArrayList<>();
                 for(DocumentSnapshot doc : documents)
                 {
-                    MyTask taskToAdd = doc.toObject(MyTask.class);
+                    Task taskToAdd = doc.toObject(Task.class);
                     List<TaskStep> stepList = taskToAdd.getSteps();
                     for(TaskStep currStep : stepList)
                     {
@@ -107,7 +109,7 @@ public class TaskRepository extends Repository {
                     taskMap.put(Integer.parseInt(taskToAdd.getTaskId()), taskToAdd);
                     toReturn.add(taskToAdd);
                 }
-                callback.onUpdate(new Result.Success<List<MyTask>>(toReturn));
+                callback.onUpdate(new Result.Success<List<Task>>(toReturn));
             }
         });
 
@@ -155,7 +157,7 @@ public class TaskRepository extends Repository {
 //
 //    }
 
-    public List<MyTask> getCurrUserTaskList(String userId)
+    public List<Task> getCurrUserTaskList(String userId)
     {
         if(currUserTaskList == null)
         {
@@ -174,7 +176,7 @@ public class TaskRepository extends Repository {
             {
                 if(result instanceof Result.Success)
                 {
-                    currUserTaskList = ((Result.Success<List<MyTask>>) result).getData();
+                    currUserTaskList = ((Result.Success<List<Task>>) result).getData();
                     currUserTaskListUpdated.postValue(true);
                 }
             }
@@ -201,7 +203,7 @@ public class TaskRepository extends Repository {
         });
     }
 
-    public void updateTask(MyTask toUpdate, RepositoryCallback<Result> callback)
+    public void updateTask(Task toUpdate, RepositoryCallback<Result> callback)
     {
         firebaseDataSource.submitDataToCollection_specifiedDocumentName("tasks", "task_" + toUpdate.getTaskId(), toUpdate, new FirebaseDataSource.DataSourceCallback<Result>()
         {
@@ -213,7 +215,7 @@ public class TaskRepository extends Repository {
         });
     }
 
-    public MyTask getTaskFromId(int taskId)
+    public Task getTaskFromId(int taskId)
     {
         return taskMap.get(taskId);
     }
@@ -221,10 +223,11 @@ public class TaskRepository extends Repository {
 
     public LiveData<Boolean> isCurrUserTaskListUpdated() { return currUserTaskListUpdated; }
 
-    public void setDateSource(FirebaseDataSource ds){this.firebaseDataSource = ds;}
+    public void setDateSource(FirebaseDataSource ds) {this.firebaseDataSource = ds;}
 
 
-    public interface TaskRepositoryCallback<T>{
+    public interface TaskRepositoryCallback<T>
+    {
         void onComplete(Result result);
     }
 }

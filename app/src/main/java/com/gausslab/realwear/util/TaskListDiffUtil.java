@@ -2,16 +2,16 @@ package com.gausslab.realwear.util;
 
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.gausslab.realwear.model.MyTask;
+import com.gausslab.realwear.model.Task;
 
 import java.util.List;
 
 public class TaskListDiffUtil extends DiffUtil.Callback
 {
-    private final List<MyTask> oldList;
-    private final List<MyTask> newList;
+    private final List<Task> oldList;
+    private final List<Task> newList;
 
-    public TaskListDiffUtil(List<MyTask> oldList, List<MyTask> newList)
+    public TaskListDiffUtil(List<Task> oldList, List<Task> newList)
     {
         this.oldList = oldList;
         this.newList = newList;

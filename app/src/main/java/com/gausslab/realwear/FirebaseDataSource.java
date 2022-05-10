@@ -147,6 +147,31 @@ public class FirebaseDataSource {
         }
     }
 
+    public void getDocumentsFromCollection_whereEqualTo_whereNotEqualTo(String collectionName, String equalParameter1, String equalParameter2, String equalParameter3, String equalParameter4, DataSourceListenerCallback<Result<List<DocumentSnapshot>>> callback)
+    {
+        Log.d("DEBUG:DataSource", "getDocumentsFromCollection_whereEqualTo_whereNotEqualTo");
+        firebaseFirestore.collection(collectionName)
+                .whereEqualTo(equalParameter1, equalParameter2)
+                .whereNotEqualTo(equalParameter3, equalParameter4)
+                .addSnapshotListener(new EventListener<QuerySnapshot>()
+                {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error)
+                    {
+                        if(error == null)
+                        {
+                            List<DocumentSnapshot> documentsList = value.getDocuments();
+                            Log.d("DEBUG:DataSource", "getDocumentsFromCollection_whereEqualTo_whereNotEqualTo: Update callback");
+                            callback.onUpdate(new Result.Success<List<DocumentSnapshot>>(documentsList));
+                        }
+                        else
+                        {
+                            callback.onUpdate(new Result.Error(error));
+                        }
+                    }
+                });
+    }
+
     public void getDocumentsFromCollection_whereEqualTo_once(String collectionName, String equalParameter1, String equalParameter2, DataSourceCallback<Result> callback)
     {
         Log.d("DEBUG:DataSource", "getDocumentsFromCollection_whereEqualTo_once: startTime = " + Timestamp.now().getSeconds());

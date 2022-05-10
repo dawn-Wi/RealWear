@@ -128,7 +128,6 @@ public class MyTaskStepFragment extends Fragment {
         bt_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myTasksViewModel.falseListLoaded();
                 NavHostFragment.findNavController(MyTaskStepFragment.this).navigate(R.id.action_myTaskStepFragment_to_homeFragment);
             }
         });

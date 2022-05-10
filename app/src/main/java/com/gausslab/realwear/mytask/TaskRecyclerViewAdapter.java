@@ -1,7 +1,5 @@
 package com.gausslab.realwear.mytask;
 
-import static com.google.android.gms.common.internal.safeparcel.SafeParcelable.NULL;
-
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -14,23 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gausslab.realwear.util.TaskListDiffUtil;
 import com.gausslab.realwear.util.adapter.adapter_listener_interface.OnItemInteractionListener;
 import com.gausslab.realwear.databinding.ObjectMytasksBinding;
-import com.gausslab.realwear.model.MyTask;
+import com.gausslab.realwear.model.Task;
 import com.gausslab.realwear.viewmodel.MyTasksViewModel;
 
 import java.util.List;
 
 public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerViewAdapter.ViewHolder> {
 
-    protected List<MyTask> taskList;
-    protected OnItemInteractionListener<MyTask> listener;
+    protected List<Task> taskList;
+    protected OnItemInteractionListener<Task> listener;
     protected MyTasksViewModel myTasksViewModel;
 
-    public TaskRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm) {
+    public TaskRecyclerViewAdapter(List<Task> items, MyTasksViewModel mvm) {
         taskList = items;
         myTasksViewModel = mvm;
     }
 
-    public TaskRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm,OnItemInteractionListener<MyTask> clickListener) {
+    public TaskRecyclerViewAdapter(List<Task> items, MyTasksViewModel mvm, OnItemInteractionListener<Task> clickListener) {
         taskList = items;
         myTasksViewModel = mvm;
         listener = clickListener;
@@ -43,7 +41,7 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        MyTask currTask = taskList.get(position);
+        Task currTask = taskList.get(position);
         holder.tv_title.setText(currTask.getTitle());
         holder.tv_location.setText("Location"); //TODO: Implement
 //        myTasksViewModel.loadTaskCreatorName(currTask.getCreatorId());
@@ -58,7 +56,7 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
 
     }
 
-    public void setTaskList(List<MyTask> newList) {
+    public void setTaskList(List<Task> newList) {
         TaskListDiffUtil diffUtil = new TaskListDiffUtil(taskList, newList);
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtil);
         diffResult.dispatchUpdatesTo(this);

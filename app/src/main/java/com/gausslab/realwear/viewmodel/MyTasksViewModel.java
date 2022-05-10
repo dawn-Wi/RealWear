@@ -7,48 +7,35 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.gausslab.realwear.App;
-import com.gausslab.realwear.repository.UserRepository;
-import com.gausslab.realwear.model.MyTask;
 import com.gausslab.realwear.model.ProgressStatus;
 import com.gausslab.realwear.model.Result;
+import com.gausslab.realwear.model.Task;
 import com.gausslab.realwear.model.TaskStep;
 import com.gausslab.realwear.repository.Repository;
 import com.gausslab.realwear.repository.TaskRepository;
+import com.gausslab.realwear.repository.UserRepository;
+import com.google.firebase.Timestamp;
 
 import java.util.List;
 
-public class MyTasksViewModel extends ViewModel {
-    private TaskRepository taskRepository = TaskRepository.getInstance();
+public class MyTasksViewModel extends ViewModel
+{
     private final UserRepository userRepository = UserRepository.getInstance();
-    private MutableLiveData<Boolean> listLoaded = new MutableLiveData<>(false);
-
+    private final TaskRepository taskRepository = TaskRepository.getInstance();
     private final LiveData<Boolean> currUserTasksUpdated = taskRepository.isCurrUserTaskListUpdated();
 
-    private List<MyTask> myTaskList;
-
-    public void startTask(MyTask mytask)
+    public void startTask(Task mytask)
     {
         mytask.setProgressStatus(ProgressStatus.STARTED);
         updateTask(mytask);
     }
 
-    public void loadMyTaskList(String id){
-        taskRepository.loadMyTaskList(id, result->{
-            if(result instanceof Result.Success){
-                myTaskList = ((Result.Success<List<MyTask>>)result).getData();
-                listLoaded.postValue(true);
-            }
-            else{
-                listLoaded.postValue(false);
-            }
-        });
+    public void loadMyTaskList(String id)
+    {
+        taskRepository.loadMyTaskList(id);
     }
 
-    public void falseListLoaded(){
-        listLoaded.postValue(false);
-    }
-
-    public void completeTask(MyTask mytask)
+    public void completeTask(Task mytask)
     {
         List<TaskStep> stepList = mytask.getSteps();
         for(TaskStep step : stepList)
@@ -59,9 +46,10 @@ public class MyTasksViewModel extends ViewModel {
         updateTask(mytask);
     }
 
-    private void updateTask(MyTask mytask)
+    private void updateTask(Task mytask)
     {
         App.setIsWorking(true);
+        mytask.addTime(mytask.getProgressStatus().toString(), Timestamp.now());
         taskRepository.updateTask(mytask, new Repository.RepositoryCallback<Result>()
         {
             @Override
@@ -73,14 +61,11 @@ public class MyTasksViewModel extends ViewModel {
         });
     }
 
-    public List<MyTask> getMyTaskList(){return myTaskList;}
+    public List<Task> getMyTaskList() {return taskRepository.getCurrUserTaskList("21");}
 
-    public LiveData<Boolean> isListLoaded(){return listLoaded;}
+    public LiveData<Boolean> isListLoaded() {return taskRepository.isCurrUserTaskListUpdated();}
 
-    public void setListLoaded(Boolean value){listLoaded.setValue(value);}
-
-    public List<MyTask> getCurrUserTasks() { return taskRepository.getCurrUserTaskList(userRepository.getCurrUser().getUserId()); }
-
+    public List<Task> getCurrUserTasks() { return taskRepository.getCurrUserTaskList("21"); }
 
     public LiveData<Boolean> isCurrUserTasksUpdated() { return currUserTasksUpdated; }
 }

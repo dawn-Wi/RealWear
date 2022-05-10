@@ -8,16 +8,15 @@ import android.view.View;
 import com.gausslab.realwear.util.adapter.adapter_listener_interface.OnItemInteractionListener;
 import com.gausslab.realwear.util.adapter.adapter_listener_interface.OnMyTaskContextMenuInteractionListener;
 import com.gausslab.realwear.viewmodel.MyTasksViewModel;
-import com.gausslab.realwear.model.MyTask;
+import com.gausslab.realwear.model.Task;
 
 import java.util.List;
 
 public class MyTasksRecyclerViewAdapter extends TaskRecyclerViewAdapter{
-    private List<MyTask> myTaskList;
-    public MyTasksRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm) {
+    public MyTasksRecyclerViewAdapter(List<Task> items, MyTasksViewModel mvm) {
         super(items,mvm);
     }
-    public MyTasksRecyclerViewAdapter(List<MyTask> items, MyTasksViewModel mvm,OnItemInteractionListener<MyTask> clickListener)
+    public MyTasksRecyclerViewAdapter(List<Task> items, MyTasksViewModel mvm, OnItemInteractionListener<Task> clickListener)
     {
         super(items, mvm, clickListener);
     }
@@ -26,7 +25,6 @@ public class MyTasksRecyclerViewAdapter extends TaskRecyclerViewAdapter{
     public void onBindViewHolder(ViewHolder holder, int position)
     {
         super.onBindViewHolder(holder, position);
-        MyTask task = taskList.get(position);
         if(listener != null && listener instanceof OnMyTaskContextMenuInteractionListener)
         {
             holder.card.setOnClickListener(new View.OnClickListener()
@@ -34,7 +32,7 @@ public class MyTasksRecyclerViewAdapter extends TaskRecyclerViewAdapter{
                 @Override
                 public void onClick(View view)
                 {
-                    ((OnMyTaskContextMenuInteractionListener<MyTask>) listener).onItemClick(taskList.get(holder.getAbsoluteAdapterPosition()));
+                    ((OnMyTaskContextMenuInteractionListener<Task>) listener).onItemClick(taskList.get(holder.getAbsoluteAdapterPosition()));
                 }
             });
             holder.card.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener()
@@ -49,7 +47,7 @@ public class MyTasksRecyclerViewAdapter extends TaskRecyclerViewAdapter{
                         @Override
                         public boolean onMenuItemClick(MenuItem item)
                         {
-                            ((OnMyTaskContextMenuInteractionListener<MyTask>) listener).onContextReturnTask(taskList.get(holder.getAbsoluteAdapterPosition()));
+                            ((OnMyTaskContextMenuInteractionListener<Task>) listener).onContextReturnTask(taskList.get(holder.getAbsoluteAdapterPosition()));
                             return true;
                         }
                     });
@@ -57,8 +55,8 @@ public class MyTasksRecyclerViewAdapter extends TaskRecyclerViewAdapter{
             });
         }
     }
-    public void setMyTaskList(List<MyTask> newList){
-        myTaskList = newList;
+    public void setMyTaskList(List<Task> newList){
+        taskList = newList;
         notifyDataSetChanged();
     }
 }

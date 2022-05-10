@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.gausslab.realwear.util.component.ComponentData;
-import com.gausslab.realwear.repository.DeviceRepository;
-import com.gausslab.realwear.util.component.ViewComponent;
 import com.gausslab.realwear.databinding.ComponentTextBinding;
 import com.gausslab.realwear.databinding.ComponentTextExpandableBinding;
 import com.gausslab.realwear.databinding.ComponentTextHeaderBinding;
 import com.gausslab.realwear.databinding.ComponentTextSubtextBinding;
 import com.gausslab.realwear.model.Device;
-import com.gausslab.realwear.model.MyTask;
+import com.gausslab.realwear.model.Task;
+import com.gausslab.realwear.repository.DeviceRepository;
+import com.gausslab.realwear.util.component.ComponentData;
+import com.gausslab.realwear.util.component.ViewComponent;
 import com.gausslab.realwear.util.component.viewholder.ExpandableTextViewHolder;
 import com.gausslab.realwear.util.component.viewholder.HeaderTextViewHolder;
 import com.gausslab.realwear.util.component.viewholder.ImageViewHolder;
@@ -52,7 +52,7 @@ public class TaskViewComponentFactory
         }
     }
 
-    public static List<ViewComponent> generateTaskViewTextComponents(MyTask task)
+    public static List<ViewComponent> generateTaskViewTextComponents(Task task)
     {
         List<ViewComponent> toReturn = new ArrayList<>();
         toReturn.add(new ViewComponent(VIEW_TYPE_TEXT_HEADER, new ComponentData("", task.getDescription())));
@@ -60,7 +60,8 @@ public class TaskViewComponentFactory
         List<ViewComponent> statusSubList = new ArrayList<>();
         if(task.getRejectedMessage() != null && task.getRejectedMessage().length() > 0)
             statusSubList.add(new ViewComponent(VIEW_TYPE_TEXT_SUB, new ComponentData("Rejection Reason", task.getRejectedMessage())));
-        statusSubList.add(new ViewComponent(VIEW_TYPE_TEXT_SUB, new ComponentData("Time", task.getTimes().get(task.getProgressStatus().name()).toDate().toString())));
+        if(task.getTimes().get(task.getProgressStatus().name()) != null)
+            statusSubList.add(new ViewComponent(VIEW_TYPE_TEXT_SUB, new ComponentData("Time", task.getTimes().get(task.getProgressStatus().name()).toDate().toString())));
         toReturn.add(new ViewComponent(VIEW_TYPE_TEXT_EXPANDABLE, new ComponentData("Status", task.getProgressStatus().name(), statusSubList)));
 
         if(task.getAssociatedDeviceName() != null && task.getAssociatedDeviceName().length() > 0)

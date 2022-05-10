@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.gausslab.realwear.model.FragmentType;
-import com.gausslab.realwear.model.MyTask;
+import com.gausslab.realwear.model.Task;
 import com.gausslab.realwear.model.ProgressStatus;
 import com.gausslab.realwear.model.TaskStep;
 import com.gausslab.realwear.repository.TaskRepository;
@@ -17,10 +17,10 @@ public class MyTaskDetailsViewModel extends ViewModel
     private final MutableLiveData<ProgressStatus> stepProgress = new MutableLiveData<>();
     private final MutableLiveData<FragmentType> fragmentType = new MutableLiveData<>(FragmentType.EMPTY);
 
-    private MyTask currTask;
+    private Task currTask;
     private TaskStep currStep;
 
-    public MyTask getCurrTask()
+    public Task getCurrTask()
     {
         return currTask;
     }
@@ -30,7 +30,7 @@ public class MyTaskDetailsViewModel extends ViewModel
         setCurrTask(taskRepository.getTaskFromId(taskId));
     }
 
-    public void setCurrTask(MyTask currTask)
+    public void setCurrTask(Task currTask)
     {
         this.currTask = currTask;
         taskProgress.setValue(currTask.getProgressStatus());

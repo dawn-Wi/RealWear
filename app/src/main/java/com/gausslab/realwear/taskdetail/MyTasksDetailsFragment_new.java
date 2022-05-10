@@ -18,7 +18,7 @@ import com.gausslab.realwear.util.adapter.TaskTextDetailsRecyclerViewAdapter;
 import com.gausslab.realwear.util.adapter.adapter_listener_interface.OnItemInteractionListener;
 import com.gausslab.realwear.databinding.FragmentMytasksdetailsNewBinding;
 import com.gausslab.realwear.util.factory.TaskViewComponentFactory;
-import com.gausslab.realwear.model.MyTask;
+import com.gausslab.realwear.model.Task;
 import com.gausslab.realwear.model.TaskStep;
 import com.gausslab.realwear.viewmodel.MyTaskDetailsViewModel;
 
@@ -113,7 +113,7 @@ public class MyTasksDetailsFragment_new extends Fragment
         //endregion
     }
 
-    public MyTask getTask()
+    public Task getTask()
     {
         return myTaskDetailsViewModel.getCurrTask();
     }

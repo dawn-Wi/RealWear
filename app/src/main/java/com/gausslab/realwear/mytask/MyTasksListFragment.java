@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 
 import com.gausslab.realwear.viewmodel.MyTasksViewModel;
 import com.gausslab.realwear.R;
-import com.gausslab.realwear.model.MyTask;
+import com.gausslab.realwear.model.Task;
 
 import java.util.List;
 
@@ -28,12 +28,12 @@ public class MyTasksListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
 
-    public List<MyTask> myTaskList;
+    public List<Task> taskList;
 
-    public MyTasksListFragment(List<MyTask> myTaskList) {this.myTaskList = myTaskList;}
+    public MyTasksListFragment(List<Task> taskList) {this.taskList = taskList;}
 
-    public static MyTasksListFragment newInstance(int columnCount, List<MyTask> myTaskList){
-        MyTasksListFragment fragment = new MyTasksListFragment(myTaskList);
+    public static MyTasksListFragment newInstance(int columnCount, List<Task> taskList){
+        MyTasksListFragment fragment = new MyTasksListFragment(taskList);
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT,columnCount);
         fragment.setArguments(args);
@@ -64,7 +64,7 @@ public class MyTasksListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            MyTasksRecyclerViewAdapter adapter = new MyTasksRecyclerViewAdapter(myTaskList, new ViewModelProvider(requireActivity()).get(MyTasksViewModel.class));
+            MyTasksRecyclerViewAdapter adapter = new MyTasksRecyclerViewAdapter(taskList, new ViewModelProvider(requireActivity()).get(MyTasksViewModel.class));
 
             recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL));
             recyclerView.setAdapter(adapter);
