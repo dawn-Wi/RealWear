@@ -2,31 +2,62 @@ package com.gausslab.realwear;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Resources;
 
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-public class App extends Application {
+import com.gausslab.realwear.repository.DeviceRepository;
+import com.gausslab.realwear.repository.ReportRepository;
+import com.gausslab.realwear.repository.TaskRepository;
+import com.gausslab.realwear.repository.UserRepository;
+
+import java.util.Locale;
+
+public class App extends Application
+{
     private static final MutableLiveData<Boolean> isWorking = new MutableLiveData<>(false);
     private static FileService fileService;
+    private static Resources mResources;
     private static Context mContext;
+    private static Locale mLocale;
 
-    public static String getDeviceQrImagePath(String deviceId)
+    private static final DeviceRepository deviceRepository = DeviceRepository.getInstance();
+    private static final ReportRepository reportRepository = ReportRepository.getInstance();
+    private static final TaskRepository taskRepository = TaskRepository.getInstance();
+    private static final UserRepository userRepository = UserRepository.getInstance();
+
+    public static Locale getLocale()
     {
-        return "deviceQrImages/device_" + deviceId + ".jpg";
+        return mLocale;
     }
 
-    public static String getFileProvider() {
-        return "com.gausslab.realwear.fileprovider";
+    public static void logout()
+    {
+        deviceRepository.logout();
+        reportRepository.logout();
+        //taskRepository.logout();
+        userRepository.logout();
     }
 
-    public static FileService getFileService() {
-        return fileService;
+    public static String getStringResource(int id)
+    {
+        return mResources.getString(id);
     }
 
-    public static void setFileService(FileService fs) {
-        fileService = fs;
+    @Override
+    public void onCreate()
+    {
+        super.onCreate();
+        mResources = getResources();
+        mContext = getApplicationContext();
+        mLocale = mResources.getConfiguration().getLocales().get(0);
+    }
+
+    public static String getTaskAttachedImagePath(String subPath)
+    {
+        return "taskAttachedImages/task_" + subPath + ".jpg";
     }
 
     public static String getTaskStepImagePath(String taskId, String stepNumber)
@@ -34,9 +65,38 @@ public class App extends Application {
         return "taskImages/task_" + taskId + "/stepImages/step_" + stepNumber + ".jpg";
     }
 
+    public static String getDeviceQrImagePath(String deviceId)
+    {
+        return "deviceQrImages/device_" + deviceId + ".jpg";
+    }
+
+    public static String getDeviceImagePath(String deviceId)
+    {
+        return "deviceImages/device_" + deviceId + ".jpg";
+    }
+
     public static String getReportImagePath(String reportId)
     {
         return "reportImages/report_" + reportId + ".jpg";
+    }
+
+
+    public static String getFileProvider() {
+        return "com.gausslab.realwear.fileprovider";
+    }
+    public static String getPdfFileProvider()
+    {
+        return "com.gausslab.arlogbook.pdffileprovider";
+    }
+
+    public static boolean equalHelper(Object a, Object b)
+    {
+        if(a == null && b == null)
+            return true;
+        if(a == null || b == null)
+            return false;
+        else
+            return a.equals(b);
     }
 
     public static int getCardColor(ColorName colorName)
@@ -69,14 +129,20 @@ public class App extends Application {
         }
     }
 
-    public static boolean equalHelper(Object a, Object b)
+    public static String getQRImagePath()
     {
-        if(a == null && b == null)
-            return true;
-        if(a == null || b == null)
-            return false;
-        else
-            return a.equals(b);
+        return "qrImages/qr_temp.jpg";
+    }
+
+
+    public static FileService getFileService()
+    {
+        return fileService;
+    }
+
+    public static void setFileService(FileService fs)
+    {
+        fileService = fs;
     }
 
     public static LiveData<Boolean> isWorking()
@@ -88,10 +154,8 @@ public class App extends Application {
     {
         isWorking.setValue(val);
     }
-    public static void setContext(Context c)
-    {
-        mContext = c;
-    }
+
+    public static void postIsWorking(boolean val) { isWorking.postValue(val); }
 
 
     public enum ColorName
@@ -101,6 +165,7 @@ public class App extends Application {
         GREEN,
         WHITE
     }
+
     public enum ColorType
     {
         NORMAL,

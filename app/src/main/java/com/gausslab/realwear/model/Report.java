@@ -1,28 +1,29 @@
 package com.gausslab.realwear.model;
 
-import com.gausslab.realwear.App;
+import static com.gausslab.realwear.App.equalHelper;
 import com.gausslab.realwear.util.component.ViewComponent;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.Exclude;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Report
 {
-    private String status;
     private String reportId;
+    private ReportStatus reportStatus;
     private String userId;
     private String userDisplayName;
-    private Timestamp submitTime;
+    private Map<String, Timestamp> times;
     private String details;
-    private boolean hasImage = false;
-    private boolean imagesLoaded = false;
-    private ImagePinHolder imagePinHolder;
     private List<ViewComponent> attachedViewComponents;
 
     public Report()
     {
-        imagesLoaded = false;
+        times = new HashMap<>();
+        attachedViewComponents = new ArrayList<>();
     }
 
     public Report(String userId, String userDisplayName)
@@ -32,23 +33,40 @@ public class Report
         this.userDisplayName = userDisplayName;
     }
 
-    public Report(String userId, String userDisplayName, String details, Timestamp submitTime)
+    @Exclude
+    public void addTime(ReportStatus status, Timestamp time)
     {
-        this();
-        this.userId = userId;
-        this.userDisplayName = userDisplayName;
-        this.details = details;
-        this.submitTime = submitTime;
+        times.put(status.name(), time);
     }
 
-    public String getStatus()
+    @Exclude
+    public Timestamp getTime(ReportStatus status)
     {
-        return status;
+        return times.get(status);
     }
 
-    public void setStatus(String status)
+    @Exclude
+    public void clearTimes()
     {
-        this.status = status;
+        times.clear();
+    }
+
+    @Exclude
+    public void addViewComponent(ViewComponent component)
+    {
+        attachedViewComponents.add(component);
+    }
+
+    @Exclude
+    public void removeViewComponent(ViewComponent component)
+    {
+        attachedViewComponents.remove(component);
+    }
+
+    @Exclude
+    public void clearViewComponents()
+    {
+        attachedViewComponents.clear();
     }
 
     public String getReportId()
@@ -59,6 +77,16 @@ public class Report
     public void setReportId(String reportId)
     {
         this.reportId = reportId;
+    }
+
+    public ReportStatus getReportStatus()
+    {
+        return reportStatus;
+    }
+
+    public void setReportStatus(ReportStatus reportStatus)
+    {
+        this.reportStatus = reportStatus;
     }
 
     public String getUserId()
@@ -81,14 +109,14 @@ public class Report
         this.userDisplayName = userDisplayName;
     }
 
-    public Timestamp getSubmitTime()
+    public Map<String, Timestamp> getTimes()
     {
-        return submitTime;
+        return times;
     }
 
-    public void setSubmitTime(Timestamp submitTime)
+    public void setTimes(Map<String, Timestamp> times)
     {
-        this.submitTime = submitTime;
+        this.times = times;
     }
 
     public String getDetails()
@@ -100,26 +128,6 @@ public class Report
     {
         this.details = details;
     }
-
-    public boolean getHasImage()
-    {
-        return hasImage;
-    }
-
-    public void setHasImage(boolean hasImage)
-    {
-        this.hasImage = hasImage;
-    }
-
-    public ImagePinHolder getImagePinHolder() { return imagePinHolder; }
-
-    public void setImagePinHolder(ImagePinHolder imagePinHolder) { this.imagePinHolder = imagePinHolder; }
-
-    @Exclude
-    public boolean isImagesLoaded() { return imagesLoaded; }
-
-    @Exclude
-    public void setImagesLoaded(boolean loaded) { imagesLoaded = loaded; }
 
     public List<ViewComponent> getAttachedViewComponents()
     {
@@ -136,17 +144,19 @@ public class Report
     {
         if(!(obj instanceof Report))
             return false;
-        Report compareTask = (Report) obj;
-        if(!App.equalHelper(reportId, compareTask.getReportId()))
+        Report compareReport = (Report) obj;
+        if(!equalHelper(reportId, compareReport.getReportId()))
             return false;
-        if(!App.equalHelper(userId, compareTask.getUserId()))
+        if(!equalHelper(reportStatus, compareReport.getReportStatus()))
             return false;
-        if(!App.equalHelper(userDisplayName, compareTask.getUserDisplayName()))
+        if(!equalHelper(userId, compareReport.getUserId()))
             return false;
-        if(!App.equalHelper(submitTime, compareTask.getSubmitTime()))
+        if(!equalHelper(userDisplayName, compareReport.getUserDisplayName()))
             return false;
-        if(!App.equalHelper(details, compareTask.getDetails()))
+        if(!equalHelper(times, compareReport.getTimes()))
             return false;
-        return App.equalHelper(hasImage, compareTask.getHasImage());
+        if(!equalHelper(details, compareReport.getDetails()))
+            return false;
+        return equalHelper(attachedViewComponents, compareReport.getAttachedViewComponents());
     }
 }

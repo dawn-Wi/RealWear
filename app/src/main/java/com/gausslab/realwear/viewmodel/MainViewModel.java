@@ -12,115 +12,42 @@ import com.gausslab.realwear.FileService;
 import com.gausslab.realwear.FirebaseDataSource;
 import com.gausslab.realwear.model.ImagePinHolder;
 import com.gausslab.realwear.model.Report;
+import com.gausslab.realwear.model.ReportStatus;
 import com.gausslab.realwear.model.Result;
+import com.gausslab.realwear.repository.ReportRepository;
+import com.gausslab.realwear.repository.Repository;
+import com.gausslab.realwear.util.component.ComponentData;
+import com.gausslab.realwear.util.component.ViewComponent;
 import com.google.firebase.Timestamp;
 
 import java.io.File;
 
 public class MainViewModel extends ViewModel
 {
+    ReportRepository reportRepository = ReportRepository.getInstance();
     MutableLiveData<Boolean> submitSuccessful = new MutableLiveData<>(false);
     FirebaseDataSource firebaseDataSource;
 
     public void submitImage(File imageFile)
     {
         Report toSubmit = createNewReport(imageFile);
-        firebaseDataSource.getNewKey(FirebaseDataSource.KeyType.REPORT, result ->
-        {
-            if(result instanceof Result.Success)
-            {
-                String newKey = ((Result.Success<String>) result).getData();
-                toSubmit.setReportId(newKey);
-                firebaseDataSource.submitDataToCollection_specifiedDocumentName("reports", "report_" + newKey, toSubmit, result2 ->
-                {
-                    if(result2 instanceof Result.Success)
-                    {
-                        if(toSubmit.getHasImage())
-                        {
-                            saveAndUploadImagePinHolderDrawables(newKey, toSubmit.getImagePinHolder(), new Callback<Result>()
-                            {
-                                @Override
-                                public void onComplete(Result result)
-                                {
-                                    submitSuccessful.setValue(true);
-                                }
-                            });
-                        }
-                    }
-                    else
-                    {
-                        submitSuccessful.setValue(false);
-                    }
-                });
-            }
-        });
-    }
-
-    private void saveAndUploadImagePinHolderDrawables(String reportId, ImagePinHolder imagePinHolder, Callback<Result> callback)
-    {
-        if(imagePinHolder.getBaseImageDrawable() != null)
-        {
-            saveReportDrawableToDisk(reportId + "_base", imagePinHolder.getBaseImageDrawable(), new Callback<Result>()
-            {
-                @Override
-                public void onComplete(Result result)
-                {
-                    if(result instanceof Result.Success)
-                    {
-                        File f = ((Result.Success<File>) result).getData();
-
-                        uploadReportImage(App.getReportImagePath(reportId + "_base"), f, new Callback<Result>()
-                        {
-                            @Override
-                            public void onComplete(Result result)
-                            {
-                                Log.d("DEBUG", reportId + " base image uploaded");
-                                callback.onComplete(result);
-                            }
-                        });
-                    }
-                    else
-                    {
-                        callback.onComplete(result);
-                    }
-                }
-            });
-        }
-    }
-
-    private void uploadReportImage(String destination, File file, Callback<Result> callback)
-    {
-        FileService fileService = App.getFileService();
-        fileService.uploadFileToDatabase(file, destination, new FileService.FileServiceCallback<Result>()
-        {
+        reportRepository.submitReport(toSubmit, new Repository.RepositoryCallback<Result>() {
             @Override
             public void onComplete(Result result)
             {
-                callback.onComplete(result);
-            }
-        });
-    }
-
-    private void saveReportDrawableToDisk(String reportId, Drawable drawable, Callback<Result> callback)
-    {
-        FileService fileService = App.getFileService();
-        fileService.saveDrawableToDisk(App.getReportImagePath(reportId), drawable, new FileService.FileServiceCallback<Result>()
-        {
-            @Override
-            public void onComplete(Result result)
-            {
-                callback.onComplete(result);
+                Log.d("DEBUG: MainViewModel", "report submitted");
             }
         });
     }
 
     private Report createNewReport(File image)
     {
-        Report toSubmit = new Report("0", "RealWear");
-        toSubmit.setDetails("RealWear");
-        toSubmit.setSubmitTime(Timestamp.now());
-        toSubmit.setImagePinHolder(new ImagePinHolder(Drawable.createFromPath(image.getAbsolutePath())));
-        toSubmit.setHasImage(true);
+        Report toSubmit = new Report("21", "RealWear");
+        toSubmit.setReportStatus(ReportStatus.SUBMITTED);
+        toSubmit.setDetails("RealWear 특이사항");
+        toSubmit.addTime(ReportStatus.SUBMITTED, Timestamp.now());
+        Drawable d = Drawable.createFromPath(image.getAbsolutePath());
+        toSubmit.addViewComponent(new ViewComponent(ViewComponent.VIEW_TYPE_IMAGE, new ComponentData("첨부 이미지",d)));
         return toSubmit;
     }
 
@@ -132,10 +59,5 @@ public class MainViewModel extends ViewModel
     public void setFirebaseDataSource(FirebaseDataSource fds)
     {
         firebaseDataSource = fds;
-    }
-
-    public interface Callback<T>
-    {
-        void onComplete(T result);
     }
 }

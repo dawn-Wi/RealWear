@@ -43,4 +43,19 @@
 
     <!-- Hints -->
 
+    <!-- Enum Values -->
+    <string name="enum_assignmentStatus_unassigned">미배정</string>
+    <string name="enum_assignmentStatus_assigned">배정됨</string>
+    <string name="enum_assignmentStatus_open">오픈</string>
+    <string name="enum_assignmentStatus_closed">완료</string>
+
+    <string name="enum_progressStatus_notStarted">시작 안함</string>
+    <string name="enum_progressStatus_started">진행중</string>
+    <string name="enum_progressStatus_pendingReview">승인 대기중</string>
+    <string name="enum_progressStatus_rejected">승인 거절</string>
+    <string name="enum_progressStatus_approved">승인 완료</string>
+
+    <string name="enum_reportStatus_submitted">접수 완료</string>
+    <string name="enum_reportStatus_confirmed">확인 완료</string>
+
 </resources>

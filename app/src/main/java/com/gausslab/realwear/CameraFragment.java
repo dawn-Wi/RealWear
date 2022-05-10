@@ -128,6 +128,8 @@ public class CameraFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mainViewModel.submitImage(imageFile);
+                Toast.makeText(getContext(), "제출 완료", Toast.LENGTH_SHORT).show();
+                NavHostFragment.findNavController(CameraFragment.this).navigate(R.id.action_cameraFragment_to_homeFragment);
             }
         });
 

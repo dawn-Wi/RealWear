@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.gausslab.realwear.R;
@@ -37,12 +38,10 @@ public class MyTasksDetailsFragment extends Fragment
     Button bt_complete;
     Button bt_home;
 
-
     public MyTasksDetailsFragment()
     {
         // Required empty public constructor
     }
-
 
     public static MyTasksDetailsFragment newInstance()
     {
@@ -59,7 +58,6 @@ public class MyTasksDetailsFragment extends Fragment
         myTaskDetailsViewModel = new ViewModelProvider(requireActivity()).get(MyTaskDetailsViewModel.class);
         myTasksViewModel = new ViewModelProvider(requireActivity()).get(MyTasksViewModel.class);
         fragmentManager = getChildFragmentManager();
-
     }
 
     @Override
@@ -107,6 +105,7 @@ public class MyTasksDetailsFragment extends Fragment
                 NavHostFragment.findNavController(MyTasksDetailsFragment.this).navigate(R.id.action_myTasksDetailsFragment_to_myTasksFragment);
             }
         });
+
         bt_start.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -166,7 +165,7 @@ public class MyTasksDetailsFragment extends Fragment
             {
                 MyTasksDetailsFragmentDirections.ActionMyTasksDetailsFragmentToWNavigationMyStepDetailsFragment action = MyTasksDetailsFragmentDirections.actionMyTasksDetailsFragmentToWNavigationMyStepDetailsFragment();
                 action.setStepNumber(Integer.parseInt(obj.getStepNumber()));
-                NavHostFragment.findNavController(MyTasksDetailsFragment.this).navigate(action);
+                NavHostFragment.findNavController(MyTasksDetailsFragment.this).navigate((NavDirections) action);
             }
         });
         FragmentTransaction transaction = fragmentManager.beginTransaction();

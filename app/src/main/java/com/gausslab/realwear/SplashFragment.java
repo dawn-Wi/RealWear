@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.gausslab.realwear.repository.ReportRepository;
 import com.gausslab.realwear.repository.TaskRepository;
 
 import java.util.concurrent.ExecutorService;
@@ -25,6 +26,7 @@ import java.util.concurrent.Executors;
 public class SplashFragment extends Fragment {
     App app;
     TaskRepository taskRepository;
+    ReportRepository reportRepository;
     FileService fileService;
     ImageView splash_iv_nameImageView;
     ImageView splash_iv_logoImageView;
@@ -47,10 +49,13 @@ public class SplashFragment extends Fragment {
         //Initialize all repositories
 
         taskRepository = TaskRepository.getInstance();
+        reportRepository = ReportRepository.getInstance();
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         FirebaseDataSource ds = new FirebaseDataSource();
         taskRepository.setExecutor(executorService);
         taskRepository.setDataSource(ds);
+        reportRepository.setExecutor(executorService);
+        reportRepository.setDataSource(ds);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         //Initialize services
         ServiceConnection connection = new ServiceConnection() {
@@ -60,6 +65,7 @@ public class SplashFragment extends Fragment {
                 fileService = binder.getService();
                 fileService.setFirebaseDataSource(ds);
                 taskRepository.setFileService(fileService);
+                reportRepository.setFileService(fileService);
                 App.setFileService(fileService);
             }
 
@@ -70,8 +76,6 @@ public class SplashFragment extends Fragment {
         Intent intent = new Intent(requireActivity(), FileService.class);
         requireActivity().startService(intent);
         requireActivity().bindService(intent, connection, Context.BIND_AUTO_CREATE);
-
-
     }
 
     @Override
